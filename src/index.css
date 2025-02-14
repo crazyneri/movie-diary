@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    background-color: darksalmon;
+    color: ghostwhite;
+}
+
+nav ul{
+    display: flex;
+    gap: 1rem;
+}
+
+.hero-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    font-size: 3rem;
+    font-weight: 600;
+}

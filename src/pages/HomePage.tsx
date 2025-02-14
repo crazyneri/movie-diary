@@ -1,3 +1,5 @@
 export default function HomePage(){
-    return <div>HomePage</div>
+    return <section className="hero-section">
+        <p>What have you watched lately?</p>
+    </section>
 }
