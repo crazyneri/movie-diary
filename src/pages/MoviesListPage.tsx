@@ -1,4 +1,6 @@
+import MovieList from '../components/MovieList';
 export default function MoviesListPage()
 {
-    return <div>Movies List Page</div>
+    return <MovieList/>
+
 }

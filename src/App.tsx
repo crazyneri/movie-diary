@@ -3,6 +3,9 @@ import Root from './pages/Root';
 import Homepage from './pages/HomePage';
 import MoviesListPage from './pages/MoviesListPage';
 import AddMoviePage from './pages/AddMoviePage';
+import useMoviesContext from "./hooks/use-movies-context";
+import {useEffect} from "react";
+
 
 const router = createBrowserRouter([
   {
@@ -21,13 +24,16 @@ const router = createBrowserRouter([
         path: '/add-movie',
         element: <AddMoviePage/>
       }
-
-
-
     ]
   }
 ])
 function App() {
+
+  const {stableGetMovieList} = useMoviesContext();
+
+  useEffect(() => {
+    stableGetMovieList();
+  }, [stableGetMovieList])
 
   return <RouterProvider router={router} />
 }

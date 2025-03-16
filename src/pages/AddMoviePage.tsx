@@ -1,13 +1,21 @@
-import Button from "../components/Button";
+import {containerFlexCol, pageTitle} from "../classes/classes";
+import Form from '../components/Form';
+
 
 export default function AddMoviePage()
 {
-    const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        console.log('clicked');
-    }
+
+    // const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //     e.preventDefault();
+    //     console.log('clicked');
+    // }
+
+
     return <div>
-        <h1>Add movie page</h1>
-        <Button type="primary" onClick={handleOnClick}>Add a movie</Button>
+
+            <div className={containerFlexCol}>
+                <h1 className={pageTitle}>Add to watchlist</h1>
+                    <Form/>
+            </div>
     </div>
 }
