@@ -1,24 +1,10 @@
 {
   "movies": [
     {
-      "title": "Frozen",
-      "genre": "horror",
-      "id": "12"
-    },
-    {
-      "id": 761,
-      "title": "Hello",
-      "genre": "horror"
-    },
-    {
-      "id": 558,
-      "title": "New movie",
-      "genre": "thriller"
-    },
-    {
-      "id": 994,
+      "id": "tt8633478",
       "title": "Run",
-      "genre": "thriller"
+      "genre": "Drama, Horror, Mystery",
+      "year": "2020"
     }
   ]
 }
