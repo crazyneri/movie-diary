@@ -26,20 +26,21 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
     const stableGetMovieList = useCallback(getMovieList, []);
 
-    const createMovie = async ({id,title, genre, year}:MovieDetail) => {
+    const createMovie = async ({id,title, genre, year, isWatched}:MovieDetail) => {
         const result = await axios.post(`${url}/movies`,{
             id,
             title,
             genre,
-            year
+            year,
+            isWatched
         });
 
         const updatedMovies = [...movies, result.data];
         setMovies(updatedMovies);
     }
 
-    const editMovie = async ({title, genre, id}: MovieDetail) => {
-        const result = await axios.put(`${url}/movies/${id}`, {title, genre});
+    const editMovie = async ({title, genre, isWatched, year, id}: MovieDetail) => {
+        const result = await axios.put(`${url}/movies/${id}`, {title, genre, isWatched, year});
 
         const updatedMovies = movies.map(movie => {
             if(id === movie.id)

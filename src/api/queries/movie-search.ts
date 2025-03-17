@@ -32,7 +32,8 @@ const movieDetails = async (movies: MovieSearchDetail) => {
             id: data.imdbID,
             title: data.Title,
             genre: data.Genre,
-            year: data.Year
+            year: data.Year,
+            isWatched: false
         };
     })) ;
 
