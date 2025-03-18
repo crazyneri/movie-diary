@@ -13,6 +13,34 @@
       "isWatched": true,
       "year": "2015",
       "id": "tt4263482"
+    },
+    {
+      "id": "tt0185937",
+      "title": "The Blair Witch Project",
+      "genre": "Horror, Mystery",
+      "year": "1999",
+      "isWatched": false
+    },
+    {
+      "id": "tt0085636",
+      "title": "Halloween III: Season of the Witch",
+      "genre": "Horror, Mystery, Sci-Fi",
+      "year": "1982",
+      "isWatched": false
+    },
+    {
+      "id": "tt0452594",
+      "title": "The Break-Up",
+      "genre": "Comedy, Drama, Romance",
+      "year": "2006",
+      "isWatched": false
+    },
+    {
+      "id": "tt2179136",
+      "title": "American Sniper",
+      "genre": "Action, Biography, Drama",
+      "year": "2014",
+      "isWatched": false
     }
   ]
 }

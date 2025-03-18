@@ -6,6 +6,7 @@ import {MovieDetail} from '../api/types/MovieDetail';
 import {searchMovie} from '../api/queries/movie-search';
 import useMoviesContext from "../hooks/use-movies-context";
 import ClipLoader from "react-spinners/ClipLoader";
+import {TvIcon} from '@heroicons/react/24/outline';
 
 
 export default function AddMoviePage()
@@ -29,14 +30,18 @@ export default function AddMoviePage()
     const renderedSearchResults = searchMovies.map(movie => {
         if(savedMovies.indexOf(movie.id) < 0)
         {
-            return <MovieSearchResultItem key={movie.id} movie={movie}/>;
+            return <MovieSearchResultItem key={movie.id} movie={movie} open={(): void => {}} activeMovie={(): void => {}}/>;
         }
     })
 
     return <div>
 
         <div className={containerFlexCol}>
-            <h1 className={pageTitle}>Add to watchlist</h1>
+            <div className="flex items-center">
+                <TvIcon className="size-5 inline"/>
+                <h1 className={pageTitle}>Add to watchlist</h1>
+            </div>
+
             <form className={containerFlexCol+' '+containerForm} onSubmit={handleSearchSubmit}>
                 <div className={formGroup}>
                     <label htmlFor="movieName">Movie name</label>

@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {containerFlexCol, containerForm, formChild, formGroup} from "../classes/classes";
-import Button from "./Button";
-import useMoviesContext from "../hooks/use-movies-context";
-import {MovieDetail} from '../api/types/MovieDetail';
+import {containerFlexCol, containerForm, formChild, formGroup} from "../../classes/classes";
+import Button from "../Button";
+import useMoviesContext from "../../hooks/use-movies-context";
+import {MovieDetail} from '../../api/types/MovieDetail';
 
 type FormDataKeys = keyof MovieDetail;
 export default function Form()
@@ -33,7 +33,7 @@ export default function Form()
 
     return <form className={containerFlexCol+' '+containerForm} onSubmit={handleSubmit}>
         <div className={formGroup}>
-            <label htmlFor="movieName">Movie name</label>
+            <label htmlFor="title">Movie name</label>
             <input className={formChild} id="title" name="title" type="text" onChange={handleFormValue}/>
         </div>
 
