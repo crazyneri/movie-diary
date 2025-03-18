@@ -1,4 +1,10 @@
-
+const cannotRemember = [
+    ["cursor-pointer"],
+    ["text-lg"],
+    ["font-semibold", "font-medium"],
+    ["max-w-lg", "32rem"],
+    ["mx-auto"]
+]
 export const containerFlexCol = "flex flex-col items-center gap-y-2";
 export const containerFlex = "flex justify-center";
 export const pageTitle = "text-xl font-semibold m-[1rem]";

@@ -5,18 +5,21 @@ import MovieSearchResultItem from "../components/MovieSearchResultItem";
 import {MovieDetail} from '../api/types/MovieDetail';
 import {searchMovie} from '../api/queries/movie-search';
 import useMoviesContext from "../hooks/use-movies-context";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 export default function AddMoviePage()
 {
     const [searchMovies, setSearchMovies] = useState<MovieDetail[]>([]);
     const [term, setTerm] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {movies} = useMoviesContext();
     const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const result = await searchMovie(term);
-        setSearchMovies(result);
+        setIsLoading(!isLoading);
+        setSearchMovies(await searchMovie(term));
+        setIsLoading(!isLoading);
     }
 
     const savedMovies = movies.map(movie => {
@@ -44,6 +47,13 @@ export default function AddMoviePage()
             </form>
 
             <div>
+                {isLoading && searchMovies.length === 0 ? <ClipLoader
+                    color="#e9967a"
+                    loading={isLoading}
+                    size={60}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                /> : ''}
                 {renderedSearchResults}
             </div>
         </div>

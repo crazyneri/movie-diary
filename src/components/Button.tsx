@@ -9,6 +9,16 @@ function Button(props: ButtonProps)
        btnClass += 'bg-sky-500 hover:bg-sky-700 hover:text-white ';
     }
 
+    if(type === 'cancel')
+    {
+        btnClass += 'bg-gray-400 hover:bg-gray-500 hover:text-white ';
+    }
+
+    if(type === 'danger')
+    {
+        btnClass += 'bg-red-300 hover:bg-red-500 hover:text-white ';
+    }
+
 
     return (<button {...rest} className={btnClass}>{children}</button>)
 }

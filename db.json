@@ -1,32 +1,18 @@
 {
   "movies": [
     {
-      "title": "Run",
-      "genre": "Drama, Horror, Mystery",
-      "isWatched": false,
-      "year": "2020",
-      "id": "tt8633478"
-    },
-    {
-      "title": "Chicken Run",
-      "genre": "Animation, Adventure, Comedy",
-      "isWatched": false,
-      "year": "2000",
-      "id": "tt0120630"
-    },
-    {
-      "title": "Hit and Run",
-      "genre": "Action, Adventure, Comedy",
-      "isWatched": false,
-      "year": "2012",
-      "id": "tt2097307"
-    },
-    {
-      "id": "tt0425413",
-      "title": "Run Fatboy Run",
-      "genre": "Comedy, Romance, Sport",
-      "year": "2007",
+      "id": "tt13640696",
+      "title": "See How They Run",
+      "genre": "Comedy, Crime, Mystery",
+      "year": "2022",
       "isWatched": false
+    },
+    {
+      "title": "The Witch",
+      "genre": "Drama, Fantasy, Horror",
+      "isWatched": true,
+      "year": "2015",
+      "id": "tt4263482"
     }
   ]
 }

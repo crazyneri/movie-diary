@@ -54,7 +54,8 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         setMovies(updatedMovies);
     }
 
-    const deleteMovieById = async ({id}:MovieDetail) => {
+    const deleteMovieById = async (movie:MovieDetail) => {
+        const id = movie.id;
         await axios.delete(`${url}/movies/${id}`);
         const updatedMovies = movies.filter(movie => {
             return movie.id !== id;
