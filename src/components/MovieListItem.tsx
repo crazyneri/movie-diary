@@ -1,11 +1,13 @@
 import {formChild, itemTitle, itemBadge, containerFlex} from "../classes/classes";
-import {MovieListItemDetail} from "../api/types/MovieDetail";
+import {MovieDetail, MovieListItemDetail} from "../api/types/MovieDetail";
 import useMoviesContext from "../hooks/use-movies-context";
 import {PencilIcon, TrashIcon} from '@heroicons/react/24/outline';
 
+interface MovieListWithModal extends MovieListItemDetail{
+    open: (activeMovie: MovieDetail) => void
+}
 
-
-export default function MovieListItem({movie, open, activeMovie}: MovieListItemDetail)
+export default function MovieListItem({movie, open}: MovieListWithModal )
 {
     const {editMovie} = useMoviesContext();
 
@@ -15,8 +17,7 @@ export default function MovieListItem({movie, open, activeMovie}: MovieListItemD
     }
 
     const handleDelete = () => {
-        open();
-        activeMovie(movie);
+        open(movie);
     }
     return <div className={formChild}>
         <div className="flex justify-between mb-[0.5rem]">

@@ -9,7 +9,7 @@ function Modal({children, onClose}: ModalDetail) {
         return () => {
             document.body.classList.remove('overflow-hidden');
         }
-    }, [])
+    }, []);
 
     return ReactDOM.createPortal(<div className="modal-container">
             <div>

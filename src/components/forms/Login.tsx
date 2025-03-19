@@ -3,16 +3,29 @@ import {useState} from "react"
 import {TvIcon} from '@heroicons/react/24/outline';
 import {voidFunction} from '../../api/types/MixDetails';
 import Button from "../Button";
+import useAuthContext from "../../hooks/use-auth-context";
+import {LoginDetail} from "../../context/auth-context";
 
 export default function Login({hideLogin}:voidFunction)
 {
-    const [formData, setFormData] = useState<{}>({});
+    const {login, user} = useAuthContext();
+    const [formData, setFormData] = useState<LoginDetail | {}>({});
 
-    const handleFormValue = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+    const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
-    return <form className={containerFlexCol+' '+containerForm}>
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if("email" in formData)
+        {
+            await login(formData);
+            console.log(user);
+        }
+
+    }
+
+    return <form onSubmit={handleSubmit} className={containerFlexCol+' '+containerForm}>
         <div className={containerFlexCol}>
             <TvIcon className="size-5"/>
             <h2>Login to create movie lists with friends!</h2>

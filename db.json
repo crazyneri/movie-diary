@@ -1,25 +1,11 @@
 {
   "movies": [
     {
-      "id": "tt13640696",
-      "title": "See How They Run",
-      "genre": "Comedy, Crime, Mystery",
-      "year": "2022",
-      "isWatched": false
-    },
-    {
       "title": "The Witch",
       "genre": "Drama, Fantasy, Horror",
       "isWatched": true,
       "year": "2015",
       "id": "tt4263482"
-    },
-    {
-      "id": "tt0185937",
-      "title": "The Blair Witch Project",
-      "genre": "Horror, Mystery",
-      "year": "1999",
-      "isWatched": false
     },
     {
       "id": "tt0085636",
@@ -41,6 +27,78 @@
       "genre": "Action, Biography, Drama",
       "year": "2014",
       "isWatched": false
+    },
+    {
+      "id": "tt6349302",
+      "title": "Sniper: Ultimate Kill",
+      "genre": "Action, Drama, Thriller",
+      "year": "2017",
+      "isWatched": false
+    },
+    {
+      "id": "tt19465630",
+      "title": "Sniper. The White Raven",
+      "genre": "Drama, War",
+      "year": "2022",
+      "isWatched": false
+    },
+    {
+      "id": "tt0338450",
+      "title": "Sniper 2",
+      "genre": "Action, War",
+      "year": "2002",
+      "isWatched": false
+    },
+    {
+      "id": "tt3776288",
+      "title": "Sniper: Legacy",
+      "genre": "Action, Thriller, War",
+      "year": "2014",
+      "isWatched": false
+    },
+    {
+      "id": "tt0045161",
+      "title": "The Sniper",
+      "genre": "Crime, Drama, Film-Noir",
+      "year": "1952",
+      "isWatched": false
+    },
+    {
+      "id": "tt0408196",
+      "title": "Sniper 3",
+      "genre": "Action, Drama, Thriller, War",
+      "year": "2004",
+      "isWatched": false
+    },
+    {
+      "id": "tt5344794",
+      "title": "Sniper: Special Ops",
+      "genre": "Action, Thriller, War",
+      "year": "2016",
+      "isWatched": false
+    },
+    {
+      "id": "tt1571243",
+      "title": "Sniper: Reloaded",
+      "genre": "Action, Drama, Thriller, War",
+      "year": "2011",
+      "isWatched": false
+    },
+    {
+      "id": "tt0108171",
+      "title": "Sniper",
+      "genre": "Action, Thriller, War",
+      "year": "1993",
+      "isWatched": false
+    }
+  ],
+  "users": [
+    {
+      "id": "456",
+      "email": "pepe@gmail.com",
+      "name": "Pepe",
+      "surname": "Smetana",
+      "password": "1234"
     }
   ]
 }

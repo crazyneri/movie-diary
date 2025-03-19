@@ -7,7 +7,5 @@ export interface MovieDetail {
 }
 
 export interface MovieListItemDetail {
-    movie: MovieDetail,
-    open: () => void,
-    activeMovie: (activeMovie: MovieDetail) => void
+    movie: MovieDetail
 }
