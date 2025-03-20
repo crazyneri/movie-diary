@@ -3,14 +3,26 @@ import {formChild, itemTitle} from "../classes/classes";
 import {MovieListItemDetail} from "../api/types/MovieDetail";
 import {PlusIcon} from '@heroicons/react/24/outline';
 import useMoviesContext from "../hooks/use-movies-context"
+import useAuthContext from "../hooks/use-auth-context";
+import {UserMovieDetail} from "../api/types/UserDetail";
 
 export default function MovieSearchResultItem({movie}: MovieListItemDetail)
 {
     const [isAdded, setIsAdded] = useState<boolean>(false);
     const {createMovie} = useMoviesContext();
+    const {token} = useAuthContext();
 
     const handleClick = async () => {
-        await createMovie(movie);
+        const userMovie: UserMovieDetail = {
+            movie
+        }
+        if(token)
+        {
+            userMovie.userId = token;
+        }
+
+        await createMovie(userMovie);
+
         setIsAdded(!isAdded);
     }
 

@@ -30,6 +30,7 @@ export default function MovieList()
     }
 
 
+
     const renderedMovies = movies.map((movie, index) => {
         return <MovieListItem key={index} movie={movie} open={openPopup}/>
     })

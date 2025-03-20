@@ -64,20 +64,6 @@
       "isWatched": false
     },
     {
-      "id": "tt0408196",
-      "title": "Sniper 3",
-      "genre": "Action, Drama, Thriller, War",
-      "year": "2004",
-      "isWatched": false
-    },
-    {
-      "id": "tt5344794",
-      "title": "Sniper: Special Ops",
-      "genre": "Action, Thriller, War",
-      "year": "2016",
-      "isWatched": false
-    },
-    {
       "id": "tt1571243",
       "title": "Sniper: Reloaded",
       "genre": "Action, Drama, Thriller, War",
@@ -90,6 +76,13 @@
       "genre": "Action, Thriller, War",
       "year": "1993",
       "isWatched": false
+    },
+    {
+      "id": "tt18924570",
+      "title": "Who Ya Wit",
+      "genre": "Drama",
+      "year": "2022",
+      "isWatched": false
     }
   ],
   "users": [
@@ -98,7 +91,44 @@
       "email": "pepe@gmail.com",
       "name": "Pepe",
       "surname": "Smetana",
-      "password": "1234"
+      "password": "1234",
+      "movies": [
+        {
+          "id": "tt4263482",
+          "title": "The Witch",
+          "genre": "Drama, Fantasy, Horror",
+          "year": "2015",
+          "isWatched": false
+        },
+        {
+          "id": "tt0387514",
+          "title": "Prime",
+          "genre": "Comedy, Drama, Romance",
+          "year": "2005",
+          "isWatched": false
+        },
+        {
+          "id": "tt3776288",
+          "title": "Sniper: Legacy",
+          "genre": "Action, Thriller, War",
+          "year": "2014",
+          "isWatched": false
+        },
+        {
+          "id": "tt3237064",
+          "title": "The Origins of Wit and Humor",
+          "genre": "Comedy",
+          "year": "2015",
+          "isWatched": false
+        },
+        {
+          "id": "tt0390831",
+          "title": "Alo",
+          "genre": "Family",
+          "year": "2003",
+          "isWatched": false
+        }
+      ]
     }
   ]
 }

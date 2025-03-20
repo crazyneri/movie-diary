@@ -1,13 +1,15 @@
 import {createContext, useState, useCallback} from "react";
 import { MovieDetail } from '../api/types/MovieDetail';
+import {UserMovieDetail} from "../api/types/UserDetail";
 import axios from "axios";
 
 
 export interface MovieContext {
     movies: MovieDetail[],
     stableGetMovieList: () => {};
+    stableGetMovieListForUser: (id: string) => {};
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
-    createMovie: (movie:MovieDetail) => Promise<void>;
+    createMovie: (movie:UserMovieDetail) => Promise<void>;
     editMovie: (movie: MovieDetail) => Promise<void>;
     deleteMovieById: ({id}:MovieDetail) => Promise<void>;
 }
@@ -26,16 +28,28 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
     const stableGetMovieList = useCallback(getMovieList, []);
 
-    const createMovie = async ({id,title, genre, year, isWatched}:MovieDetail) => {
-        const result = await axios.post(`${url}/movies`,{
-            id,
-            title,
-            genre,
-            year,
-            isWatched
-        });
+    const getMovieListForUser = async (id:string) => {
 
-        const updatedMovies = [...movies, result.data];
+        const result = await axios.get(`${url}/users/${id}`);
+        const foundMovies = result.data.movies === undefined ? [] : result.data.movies;
+        setMovies(foundMovies);
+    }
+
+    const stableGetMovieListForUser = useCallback(getMovieListForUser,[]);
+
+    const createMovie = async ({movie, userId = 0}:UserMovieDetail) => {
+        if(userId === 0)
+        {
+           await axios.post(`${url}/movies`,movie);
+        }else{
+            const userResult = await axios.get(`${url}/users/${userId}`);
+            const user = userResult.data;
+            user.movies = [...user.movies, movie];
+
+            await axios.put(`${url}/users/${userId}`, user);
+        }
+
+        const updatedMovies = [...movies, movie];
         setMovies(updatedMovies);
     }
 
@@ -66,6 +80,6 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
 
 
-    return <MoviesContext.Provider value={{movies, stableGetMovieList, setMovies, createMovie, editMovie, deleteMovieById}}>{props.children}</MoviesContext.Provider>
+    return <MoviesContext.Provider value={{movies, stableGetMovieList, stableGetMovieListForUser, setMovies, createMovie, editMovie, deleteMovieById}}>{props.children}</MoviesContext.Provider>
 }
 

@@ -1,5 +1,6 @@
 import {createContext, useState} from "react";
 import {UserDetail} from "../api/types/UserDetail";
+
 import axios from "axios";
 
 export interface LoginDetail{
@@ -22,9 +23,11 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
     const [user, setUser] = useState<UserDetail | null>(null);
     const [token, setToken] = useState(localStorage.getItem('token') || "");
 
+
     const login = async ({email, password}:LoginDetail) => {
         const result = await axios.get(url);
-        const user = result.data.filter(userData => {
+        const users = result.data as UserDetail[];
+        const user = users.filter(userData => {
             if(userData.email === email && userData.password === password)
             {
                 return userData;
@@ -34,10 +37,12 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
 
         if(user)
         {
+
             setUser(user);
             setToken(user.id);
 
             localStorage.setItem('token', user.id);
+
         }
     }
 

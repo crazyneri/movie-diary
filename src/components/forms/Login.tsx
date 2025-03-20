@@ -8,7 +8,7 @@ import {LoginDetail} from "../../context/auth-context";
 
 export default function Login({hideLogin}:voidFunction)
 {
-    const {login, user} = useAuthContext();
+    const {login} = useAuthContext();
     const [formData, setFormData] = useState<LoginDetail | {}>({});
 
     const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,8 @@ export default function Login({hideLogin}:voidFunction)
         if("email" in formData)
         {
             await login(formData);
-            console.log(user);
+            // TODO movie list not refreshed w/o reloading
+            window.location.reload();
         }
 
     }

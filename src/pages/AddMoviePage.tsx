@@ -16,6 +16,7 @@ export default function AddMoviePage()
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {movies} = useMoviesContext();
+
     const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(!isLoading);
@@ -30,7 +31,7 @@ export default function AddMoviePage()
     const renderedSearchResults = searchMovies.map(movie => {
         if(savedMovies.indexOf(movie.id) < 0)
         {
-            return <MovieSearchResultItem key={movie.id} movie={movie} open={(): void => {}} activeMovie={(): void => {}}/>;
+            return <MovieSearchResultItem key={movie.id} movie={movie} />;
         }
     })
 
