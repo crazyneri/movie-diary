@@ -5,12 +5,14 @@ import {useState} from "react";
 import Modal from './Modal';
 import {MovieDetail} from "../api/types/MovieDetail";
 import Button from "./Button";
+import useAuthContext from "../hooks/use-auth-context";
 
 export default function MovieList()
 {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [activeMovie, setActiveMovie] = useState<MovieDetail>();
     const { movies, deleteMovieById } = useMoviesContext();
+    const {token} = useAuthContext();
 
 
     const openPopup = (movie:MovieDetail) => {
@@ -25,7 +27,7 @@ export default function MovieList()
     const deleteSelectedMovie = async () => {
         if(!!activeMovie?.id)
         {
-            await deleteMovieById(activeMovie);
+            await deleteMovieById({movie:activeMovie, userId: token});
             setIsOpen(false);
         }
     }

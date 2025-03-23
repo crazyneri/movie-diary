@@ -19,8 +19,18 @@ export const AuthContext = createContext<AuthContextDetail | null>(null);
 
 export default function AuthProvider(props: React.PropsWithChildren<{}>)
 {
+
+    const storedUser = localStorage.getItem('user');
+    let initialUser;
+    if(storedUser)
+    {
+        initialUser = JSON.parse(storedUser);
+    }
+
+
+
     const url = 'http://localhost:3004/users';
-    const [user, setUser] = useState<UserDetail | null>(null);
+    const [user, setUser] = useState<UserDetail | null>( initialUser || null);
     const [token, setToken] = useState(localStorage.getItem('token') || "");
 
     const login = async ({email, password}:LoginDetail) => {
@@ -41,6 +51,7 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
             setToken(user.id);
 
             localStorage.setItem('token', user.id);
+            localStorage.setItem('user', JSON.stringify(user));
 
         }
     }

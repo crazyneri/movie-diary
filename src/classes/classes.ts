@@ -3,7 +3,8 @@ const cannotRemember = [
     ["text-lg", "text-2xl", "text-3xl"],
     ["font-semibold", "font-medium"],
     ["max-w-lg", "32rem"],
-    ["mx-auto"]
+    ["mx-auto"],
+    ["items-center"]
 ]
 export const containerFlexCol = "flex flex-col items-center gap-y-2";
 export const containerFlex = "flex justify-center";

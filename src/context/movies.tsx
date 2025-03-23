@@ -11,7 +11,7 @@ export interface MovieContext {
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
     createMovie: (movie:UserMovieDetail) => Promise<void>;
     editMovie: (movie: MovieDetail) => Promise<void>;
-    deleteMovieById: ({id}:MovieDetail) => Promise<void>;
+    deleteMovieById: ({movie, userId}:{movie:MovieDetail; userId?: string | number}) => Promise<void>;
 }
 
 export const MoviesContext = createContext<MovieContext | null>(null);
@@ -85,12 +85,28 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         setMovies(updatedMovies);
     }
 
-    const deleteMovieById = async (movie:MovieDetail) => {
+    const deleteMovieById = async ({movie, userId = 0}:{movie: MovieDetail; userId?:string | number}) => {
         const id = movie.id;
-        await axios.delete(`${url}/movies/${id}`);
-        const updatedMovies = movies.filter(movie => {
-            return movie.id !== id;
-        });
+        let updatedMovies: MovieDetail[];
+        if(!userId)
+        {
+            await axios.delete(`${url}/movies/${id}`);
+            updatedMovies = movies.filter(movie => {
+                return movie.id !== id;
+            });
+        }else{
+            const userData = await axios.get(`${url}/users/${userId}`);
+
+            updatedMovies = movies.filter(movie => {
+                return movie.id !== id;
+            });
+
+            userData.data.movies = updatedMovies;
+            await axios.put(`${url}/users/${userId}`, userData.data);
+
+
+        }
+
 
         setMovies(updatedMovies);
     }
