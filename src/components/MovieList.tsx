@@ -12,6 +12,7 @@ export default function MovieList()
     const [activeMovie, setActiveMovie] = useState<MovieDetail>();
     const { movies, deleteMovieById } = useMoviesContext();
 
+
     const openPopup = (movie:MovieDetail) => {
         setIsOpen(!isOpen);
         setActiveMovie(movie);

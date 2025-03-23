@@ -4,8 +4,8 @@ import Homepage from './pages/HomePage';
 import MoviesListPage from './pages/MoviesListPage';
 import AddMoviePage from './pages/AddMoviePage';
 import useMoviesContext from "./hooks/use-movies-context";
-import useAuthContext from "./hooks/use-auth-context";
 import {useEffect} from "react";
+import useAuthContext from "./hooks/use-auth-context";
 
 
 const router = createBrowserRouter([
@@ -30,21 +30,25 @@ const router = createBrowserRouter([
 ])
 function App() {
 
-  const {stableGetMovieList, stableGetMovieListForUser} = useMoviesContext();
+  const {stableGetMovieList} = useMoviesContext();
   const {token} = useAuthContext();
 
-  if(token)
-  {
+    // useEffect(() => {
+    //   if(!token)
+    //   {
+    //     stableGetMovieList();
+    //   }else{
+    //     stableGetMovieListForUser(token);
+    //   }
+    //
+    // }, [stableGetMovieList, stableGetMovieListForUser, token])
 
-    useEffect(() => {
-      stableGetMovieListForUser(token);
-    }, [stableGetMovieListForUser])
-  }else{
 
-    useEffect(() => {
-      stableGetMovieList();
-    }, [stableGetMovieList])
-  }
+  useEffect(() => {
+      stableGetMovieList(token);
+
+  }, [stableGetMovieList, token])
+
 
 
   return <RouterProvider router={router}/>

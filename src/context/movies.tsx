@@ -6,8 +6,8 @@ import axios from "axios";
 
 export interface MovieContext {
     movies: MovieDetail[],
-    stableGetMovieList: () => {};
-    stableGetMovieListForUser: (id: string) => {};
+    stableGetMovieList: (id?: string | number) => {};
+    // stableGetMovieListForUser: (id: string) => {};
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
     createMovie: (movie:UserMovieDetail) => Promise<void>;
     editMovie: (movie: MovieDetail) => Promise<void>;
@@ -21,21 +21,38 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
     const[movies, setMovies] = useState<MovieDetail[]>([]);
 
-    const getMovieList = async () => {
-        const result = await axios.get(`${url}/movies`);
-        setMovies(result.data);
+    const getMovieList = async (id?: string | number) => {
+        let foundMovies;
+        if(!id)
+        {
+            const result = await axios.get(`${url}/movies`);
+            foundMovies = result.data;
+        }else{
+            const result = await axios.get(`${url}/users/${id}`);
+            foundMovies = result.data.movies === undefined ? [] : result.data.movies;
+        }
+
+        setMovies(foundMovies);
+
     }
+
+    // const getMovieList = async () => {
+    //
+    //         const result = await axios.get(`${url}/movies`);
+    //         setMovies(result.data);
+    //
+    // }
 
     const stableGetMovieList = useCallback(getMovieList, []);
 
-    const getMovieListForUser = async (id:string) => {
-
-        const result = await axios.get(`${url}/users/${id}`);
-        const foundMovies = result.data.movies === undefined ? [] : result.data.movies;
-        setMovies(foundMovies);
-    }
-
-    const stableGetMovieListForUser = useCallback(getMovieListForUser,[]);
+    // const getMovieListForUser = async (id:string) => {
+    //
+    //     const result = await axios.get(`${url}/users/${id}`);
+    //     const foundMovies = result.data.movies === undefined ? [] : result.data.movies;
+    //     setMovies(foundMovies);
+    // }
+    //
+    // const stableGetMovieListForUser = useCallback(getMovieListForUser,[]);
 
     const createMovie = async ({movie, userId = 0}:UserMovieDetail) => {
         if(userId === 0)
@@ -80,6 +97,6 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
 
 
-    return <MoviesContext.Provider value={{movies, stableGetMovieList, stableGetMovieListForUser, setMovies, createMovie, editMovie, deleteMovieById}}>{props.children}</MoviesContext.Provider>
+    return <MoviesContext.Provider value={{movies, stableGetMovieList, setMovies, createMovie, editMovie, deleteMovieById}}>{props.children}</MoviesContext.Provider>
 }
 

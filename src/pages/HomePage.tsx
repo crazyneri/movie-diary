@@ -4,12 +4,12 @@ import {containerFlexCol} from '../classes/classes';
 import SignUp from "../components/forms/SignUp";
 import useAuthContext from "../hooks/use-auth-context";
 export default function HomePage(){
-    const {user, getUser} = useAuthContext();
+    const {user, getUser, token} = useAuthContext();
     const [isLogin, setIsLogin] = useState<boolean>(true);
 
     useEffect(() => {
         getUser();
-    },[getUser])
+    },[token])
 
     const displayLogin = () => {
         setIsLogin(!isLogin);

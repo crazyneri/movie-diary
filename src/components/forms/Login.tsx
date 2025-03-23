@@ -20,8 +20,7 @@ export default function Login({hideLogin}:voidFunction)
         if("email" in formData)
         {
             await login(formData);
-            // TODO movie list not refreshed w/o reloading
-            window.location.reload();
+
         }
 
     }

@@ -1,13 +1,6 @@
 {
   "movies": [
     {
-      "title": "The Witch",
-      "genre": "Drama, Fantasy, Horror",
-      "isWatched": true,
-      "year": "2015",
-      "id": "tt4263482"
-    },
-    {
       "id": "tt0085636",
       "title": "Halloween III: Season of the Witch",
       "genre": "Horror, Mystery, Sci-Fi",
@@ -22,66 +15,10 @@
       "isWatched": false
     },
     {
-      "id": "tt2179136",
-      "title": "American Sniper",
-      "genre": "Action, Biography, Drama",
-      "year": "2014",
-      "isWatched": false
-    },
-    {
-      "id": "tt6349302",
-      "title": "Sniper: Ultimate Kill",
-      "genre": "Action, Drama, Thriller",
-      "year": "2017",
-      "isWatched": false
-    },
-    {
-      "id": "tt19465630",
-      "title": "Sniper. The White Raven",
-      "genre": "Drama, War",
-      "year": "2022",
-      "isWatched": false
-    },
-    {
-      "id": "tt0338450",
-      "title": "Sniper 2",
-      "genre": "Action, War",
-      "year": "2002",
-      "isWatched": false
-    },
-    {
-      "id": "tt3776288",
-      "title": "Sniper: Legacy",
-      "genre": "Action, Thriller, War",
-      "year": "2014",
-      "isWatched": false
-    },
-    {
-      "id": "tt0045161",
-      "title": "The Sniper",
-      "genre": "Crime, Drama, Film-Noir",
-      "year": "1952",
-      "isWatched": false
-    },
-    {
-      "id": "tt1571243",
-      "title": "Sniper: Reloaded",
-      "genre": "Action, Drama, Thriller, War",
-      "year": "2011",
-      "isWatched": false
-    },
-    {
       "id": "tt0108171",
       "title": "Sniper",
       "genre": "Action, Thriller, War",
       "year": "1993",
-      "isWatched": false
-    },
-    {
-      "id": "tt18924570",
-      "title": "Who Ya Wit",
-      "genre": "Drama",
-      "year": "2022",
       "isWatched": false
     }
   ],
@@ -126,6 +63,13 @@
           "title": "Alo",
           "genre": "Family",
           "year": "2003",
+          "isWatched": false
+        },
+        {
+          "id": "tt3152624",
+          "title": "Trainwreck",
+          "genre": "Comedy, Drama, Romance",
+          "year": "2015",
           "isWatched": false
         }
       ]

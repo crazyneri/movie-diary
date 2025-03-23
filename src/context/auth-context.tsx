@@ -23,7 +23,6 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
     const [user, setUser] = useState<UserDetail | null>(null);
     const [token, setToken] = useState(localStorage.getItem('token') || "");
 
-
     const login = async ({email, password}:LoginDetail) => {
         const result = await axios.get(url);
         const users = result.data as UserDetail[];
