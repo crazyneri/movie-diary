@@ -7,10 +7,16 @@ export interface LoginDetail{
     email: string,
     password: string
 }
+
+export interface RegisterDetail extends LoginDetail{
+    name: string,
+    surname: string,
+}
 interface AuthContextDetail{
     user: UserDetail | null,
     setUser: React.Dispatch<React.SetStateAction<UserDetail | null>>,
     login: ({email, password}:LoginDetail) => Promise<void>,
+    register: (formData: RegisterDetail) => Promise<boolean>,
     token: string,
     setToken: React.Dispatch<React.SetStateAction<string>>,
     getUser: () => Promise<void>;
@@ -36,7 +42,7 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
     const login = async ({email, password}:LoginDetail) => {
         const result = await axios.get(url);
         const users = result.data as UserDetail[];
-        const user = users.filter(userData => {
+        const userResult = users.filter(userData => {
             if(userData.email === email && userData.password === password)
             {
                 return userData;
@@ -44,16 +50,33 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
             return;
         })[0];
 
-        if(user)
+        if(userResult)
         {
 
-            setUser(user);
-            setToken(user.id);
+            setUser(userResult);
+            setToken(userResult.id);
 
-            localStorage.setItem('token', user.id);
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', userResult.id);
+            localStorage.setItem('user', JSON.stringify(userResult));
 
         }
+    }
+
+    const register = async (registerData: RegisterDetail) => {
+        const userData = {...registerData, "id": Math.floor(Math.random()*1000).toString()};
+        const result = await axios.post(url, userData);
+        if(result.status === 201 || result.status === 200)
+        {
+            setUser(result.data);
+            setToken(result.data.id);
+
+            localStorage.setItem('token', result.data.id);
+            localStorage.setItem('user', JSON.stringify(result.data));
+            return true;
+        }
+        return false;
+
+
     }
 
     const getUser = async () => {
@@ -70,5 +93,5 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
         }
     }
 
-    return <AuthContext.Provider value={{user, setUser, login, token, setToken, getUser}}>{props.children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{user, setUser, login, register, token, setToken, getUser}}>{props.children}</AuthContext.Provider>;
 }

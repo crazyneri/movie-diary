@@ -61,7 +61,13 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         }else{
             const userResult = await axios.get(`${url}/users/${userId}`);
             const user = userResult.data;
-            user.movies = [...user.movies, movie];
+            if(!user?.movies || user.movies.length === 0)
+            {
+                user.movies = [movie];
+            }else{
+                user.movies = [...user.movies, movie];
+            }
+
 
             await axios.put(`${url}/users/${userId}`, user);
         }

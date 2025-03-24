@@ -1,11 +1,11 @@
 {
   "movies": [
     {
-      "id": "tt0085636",
       "title": "Halloween III: Season of the Witch",
       "genre": "Horror, Mystery, Sci-Fi",
+      "isWatched": true,
       "year": "1982",
-      "isWatched": false
+      "id": "tt0085636"
     },
     {
       "id": "tt0452594",
