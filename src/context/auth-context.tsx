@@ -19,7 +19,8 @@ interface AuthContextDetail{
     register: (formData: RegisterDetail) => Promise<boolean>,
     token: string,
     setToken: React.Dispatch<React.SetStateAction<string>>,
-    getUser: () => Promise<void>;
+    getUser: () => Promise<void>,
+    logout: () => void
 }
 export const AuthContext = createContext<AuthContextDetail | null>(null);
 
@@ -62,6 +63,13 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+        setToken('');
+    }
+
     const register = async (registerData: RegisterDetail) => {
         const userData = {...registerData, "id": Math.floor(Math.random()*1000).toString()};
         const result = await axios.post(url, userData);
@@ -93,5 +101,7 @@ export default function AuthProvider(props: React.PropsWithChildren<{}>)
         }
     }
 
-    return <AuthContext.Provider value={{user, setUser, login, register, token, setToken, getUser}}>{props.children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{user, setUser, login, register, token, setToken, getUser, logout}}>{props.children}</AuthContext.Provider>;
 }
+
+

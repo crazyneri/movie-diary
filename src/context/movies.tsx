@@ -10,7 +10,7 @@ export interface MovieContext {
     // stableGetMovieListForUser: (id: string) => {};
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
     createMovie: (movie:UserMovieDetail) => Promise<void>;
-    editMovie: (movie: MovieDetail) => Promise<void>;
+    editMovie: ({movie, userId}: {movie: MovieDetail, userId: string | number }) => Promise<void>;
     deleteMovieById: ({movie, userId}:{movie:MovieDetail; userId?: string | number}) => Promise<void>;
 }
 
@@ -43,6 +43,7 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
     //
     // }
 
+    // prevents the function from being recreated unless necessary
     const stableGetMovieList = useCallback(getMovieList, []);
 
     // const getMovieListForUser = async (id:string) => {
@@ -76,17 +77,36 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         setMovies(updatedMovies);
     }
 
-    const editMovie = async ({title, genre, isWatched, year, id}: MovieDetail) => {
-        const result = await axios.put(`${url}/movies/${id}`, {title, genre, isWatched, year});
+    const editMovie = async ({movie, userId = 0}: {movie: MovieDetail, userId: number | string}) => {
+        let updatedMovies: MovieDetail[];
+        if(userId === 0)
+        {
+            const result = await axios.put(`${url}/movies/${movie.id}`, {movie});
 
-        const updatedMovies = movies.map(movie => {
-            if(id === movie.id)
-            {
-                return result.data;
-            }
+            updatedMovies = movies.map(currentMovie => {
+                if(movie.id === currentMovie.id)
+                {
+                    return result.data;
+                }
 
-            return movie;
-        });
+                return movie;
+            });
+        }else{
+            const userData = await axios.get(`${url}/users/${userId}`);
+            updatedMovies = movies.map(currentMovie => {
+                if(currentMovie.id === movie.id)
+                {
+                    return movie;
+                }
+
+                return currentMovie;
+            });
+
+            userData.data.movies = updatedMovies;
+            await axios.put(`${url}/users/${userId}`, userData.data);
+
+        }
+
 
         setMovies(updatedMovies);
     }

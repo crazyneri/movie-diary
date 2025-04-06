@@ -5,7 +5,7 @@ import useAuthContext from '../hooks/use-auth-context';
 
 export default function Header()
 {
-    const {user} = useAuthContext();
+    const {user, logout} = useAuthContext();
     const greetUser = () =>{
         if(user?.name)
         {
@@ -23,6 +23,9 @@ export default function Header()
                 <Link to={'/my-movies'}>My Movies</Link>
             </ul>
         </nav>
-        <div>{greetUser() || 'Account'}</div>
+        <div className={containerFlex+' gap-[1rem]'}>
+            <p>{greetUser() || 'Account'}</p>
+            {user ? <Link to={'/'} onClick={logout}>Logout</Link> : ''}
+        </div>
     </header>
 }

@@ -2,6 +2,7 @@ import {formChild, itemTitle, itemBadge, containerFlex} from "../classes/classes
 import {MovieDetail, MovieListItemDetail} from "../api/types/MovieDetail";
 import useMoviesContext from "../hooks/use-movies-context";
 import {PencilIcon, TrashIcon} from '@heroicons/react/24/outline';
+import useAuthContext from "../hooks/use-auth-context";
 
 interface MovieListWithModal extends MovieListItemDetail{
     open: (activeMovie: MovieDetail) => void
@@ -10,10 +11,11 @@ interface MovieListWithModal extends MovieListItemDetail{
 export default function MovieListItem({movie, open}: MovieListWithModal )
 {
     const {editMovie} = useMoviesContext();
+    const {token} = useAuthContext();
 
     const handleClick = async (isWatched: boolean) => {
         const updatedMovie = {...movie, "isWatched": !isWatched};
-        await editMovie(updatedMovie);
+        await editMovie({movie:updatedMovie, userId: token});
     }
 
     const handleDelete = () => {

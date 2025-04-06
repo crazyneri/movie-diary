@@ -66,6 +66,29 @@
           "isWatched": false
         }
       ]
+    },
+    {
+      "id": "139",
+      "name": "Melinda",
+      "surname": "Duruck",
+      "email": "meli@gmail.com",
+      "password": "5678",
+      "movies": [
+        {
+          "id": "tt18412256",
+          "title": "Alien: Romulus",
+          "genre": "Horror, Sci-Fi, Thriller",
+          "year": "2024",
+          "isWatched": true
+        },
+        {
+          "id": "tt13654226",
+          "title": "The Gorge",
+          "genre": "Action, Adventure, Horror",
+          "year": "2025",
+          "isWatched": false
+        }
+      ]
     }
   ]
 }
