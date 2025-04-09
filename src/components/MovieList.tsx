@@ -6,11 +6,14 @@ import Modal from './Modal';
 import {MovieDetail} from "../api/types/MovieDetail";
 import Button from "./Button";
 import useAuthContext from "../hooks/use-auth-context";
+import MovieListSearch from "./MovieListSearch";
 
 export default function MovieList()
 {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [activeMovie, setActiveMovie] = useState<MovieDetail>();
+    const [searchTerm, setSearchTerm] = useState('');
+
     const { movies, deleteMovieById } = useMoviesContext();
     const {token} = useAuthContext();
 
@@ -35,12 +38,22 @@ export default function MovieList()
 
 
     const renderedMovies = movies.map((movie, index) => {
-        return <MovieListItem key={index} movie={movie} open={openPopup}/>
+        if(searchTerm === '')
+        {
+            return <MovieListItem key={index} movie={movie} open={openPopup}/>
+        }else{
+            if(movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            {
+                return <MovieListItem key={index} movie={movie} open={openPopup}/>
+            }
+        }
+
     })
 
     const container = movies.length > 0 ? renderedMovies : 'No movies added in the list';
 
-    return <div className={containerForm + ' flex flex-col gap-[1rem]'}>
+    return <div className={containerForm + ' flex flex-col gap-[1rem] max-h-[80vh] overflow-y-auto'}>
+        {renderedMovies.length !== 0 && <MovieListSearch onSearch={setSearchTerm}/>}
         {container}
         {isOpen && <Modal onClose={closePopup}>
             <div className={containerFlex + ' gap-[0.3rem] items-baseline'}>

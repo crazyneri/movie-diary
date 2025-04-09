@@ -1,15 +1,27 @@
 import {createContext, useState, useCallback} from "react";
 import { MovieDetail } from '../api/types/MovieDetail';
-import {UserMovieDetail} from "../api/types/UserDetail";
 import axios from "axios";
 
+
+function sortMoviesByWatched(movies:MovieDetail[])
+{
+    if(movies.length > 0)
+    {
+        return movies.sort(function(a, b){
+            return  Number(a.isWatched) - Number(b.isWatched) ;
+        });
+
+    }
+
+    return movies;
+}
 
 export interface MovieContext {
     movies: MovieDetail[],
     stableGetMovieList: (id?: string | number) => {};
     // stableGetMovieListForUser: (id: string) => {};
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
-    createMovie: (movie:UserMovieDetail) => Promise<void>;
+    createMovie: ({movie, userId}:{movie: MovieDetail, userId: string | number}) => Promise<void>;
     editMovie: ({movie, userId}: {movie: MovieDetail, userId: string | number }) => Promise<void>;
     deleteMovieById: ({movie, userId}:{movie:MovieDetail; userId?: string | number}) => Promise<void>;
 }
@@ -32,31 +44,16 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
             foundMovies = result.data.movies === undefined ? [] : result.data.movies;
         }
 
-        setMovies(foundMovies);
+        setMovies(sortMoviesByWatched(foundMovies));
 
     }
-
-    // const getMovieList = async () => {
-    //
-    //         const result = await axios.get(`${url}/movies`);
-    //         setMovies(result.data);
-    //
-    // }
 
     // prevents the function from being recreated unless necessary
     const stableGetMovieList = useCallback(getMovieList, []);
 
-    // const getMovieListForUser = async (id:string) => {
-    //
-    //     const result = await axios.get(`${url}/users/${id}`);
-    //     const foundMovies = result.data.movies === undefined ? [] : result.data.movies;
-    //     setMovies(foundMovies);
-    // }
-    //
-    // const stableGetMovieListForUser = useCallback(getMovieListForUser,[]);
 
-    const createMovie = async ({movie, userId = 0}:UserMovieDetail) => {
-        if(userId === 0)
+    const createMovie = async ({movie, userId = 0}:{movie:MovieDetail, userId: string | number}) => {
+        if(userId === 0 || userId === '')
         {
            await axios.post(`${url}/movies`,movie);
         }else{
@@ -69,7 +66,6 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
                 user.movies = [...user.movies, movie];
             }
 
-
             await axios.put(`${url}/users/${userId}`, user);
         }
 
@@ -79,9 +75,10 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
     const editMovie = async ({movie, userId = 0}: {movie: MovieDetail, userId: number | string}) => {
         let updatedMovies: MovieDetail[];
-        if(userId === 0)
+
+        if(userId === 0 || userId === '')
         {
-            const result = await axios.put(`${url}/movies/${movie.id}`, {movie});
+            const result = await axios.put(`${url}/movies/${movie.id}`, movie);
 
             updatedMovies = movies.map(currentMovie => {
                 if(movie.id === currentMovie.id)
@@ -89,8 +86,9 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
                     return result.data;
                 }
 
-                return movie;
+                return currentMovie;
             });
+
         }else{
             const userData = await axios.get(`${url}/users/${userId}`);
             updatedMovies = movies.map(currentMovie => {
@@ -108,7 +106,7 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         }
 
 
-        setMovies(updatedMovies);
+        setMovies(sortMoviesByWatched(updatedMovies));
     }
 
     const deleteMovieById = async ({movie, userId = 0}:{movie: MovieDetail; userId?:string | number}) => {

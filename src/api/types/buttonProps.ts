@@ -5,6 +5,7 @@
 //
 // }
 
+// TODO find out how to correct this
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button">{
     type: string;
     children: React.ReactNode;

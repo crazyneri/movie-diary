@@ -9,11 +9,13 @@ import ClipLoader from "react-spinners/ClipLoader";
 import {TvIcon} from '@heroicons/react/24/outline';
 
 
+
 export default function AddMoviePage()
 {
     const [searchMovies, setSearchMovies] = useState<MovieDetail[]>([]);
     const [term, setTerm] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [addedMovieId, setAddedMovieId] = useState('');
 
     const {movies} = useMoviesContext();
 
@@ -24,6 +26,10 @@ export default function AddMoviePage()
         setIsLoading(!isLoading);
     }
 
+    const handleTransition = (movie_id: string) => {
+        setAddedMovieId(movie_id);
+    }
+
     const savedMovies = movies.map(movie => {
         return movie.id;
     })
@@ -31,7 +37,11 @@ export default function AddMoviePage()
     const renderedSearchResults = searchMovies.map(movie => {
         if(savedMovies.indexOf(movie.id) < 0)
         {
-            return <MovieSearchResultItem key={movie.id} movie={movie} />;
+            return <MovieSearchResultItem key={movie.id} movie={movie} classes={''} onAdded={handleTransition}/>;
+        }
+        if(movie.id === addedMovieId)
+        {
+            return <MovieSearchResultItem key={movie.id} movie={movie} classes={'movie-added'} onAdded={handleTransition}/>;
         }
     })
 
@@ -52,7 +62,7 @@ export default function AddMoviePage()
                 <Button type="primary">Search a movie</Button>
             </form>
 
-            <div>
+            <div className="flex flex-col items-center w-full lg:w-[50%] md:w-[70%]">
                 {isLoading && searchMovies.length === 0 ? <ClipLoader
                     color="#e9967a"
                     loading={isLoading}

@@ -13,19 +13,21 @@ export default function Form()
     const handleFormValue = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const title = e.currentTarget.elements.name;
         const genre = e.currentTarget.elements.genre;
 
-        const object = {
+        const object: MovieDetail = {
             id: Math.floor((Math.random() * 1000)),
             title: title.value,
-            genre: genre.value
+            genre: genre.value,
+            year: '0',
+            isWatched: false
         }
 
-        createMovie(object);
+        await createMovie({movie: object, userId:0});
 
         title.value = '';
         genre.value = 'none';

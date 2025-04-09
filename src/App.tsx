@@ -6,6 +6,7 @@ import AddMoviePage from './pages/AddMoviePage';
 import useMoviesContext from "./hooks/use-movies-context";
 import {useEffect} from "react";
 import useAuthContext from "./hooks/use-auth-context";
+import FriendsMovieListPage from "./pages/FriendsMovieListPage";
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: '/add-movie',
         element: <AddMoviePage/>
+      },
+      {
+        path: '/my-lists',
+        element: <FriendsMovieListPage/>
       }
     ]
   }
@@ -32,17 +37,6 @@ function App() {
 
   const {stableGetMovieList} = useMoviesContext();
   const {token} = useAuthContext();
-
-    // useEffect(() => {
-    //   if(!token)
-    //   {
-    //     stableGetMovieList();
-    //   }else{
-    //     stableGetMovieListForUser(token);
-    //   }
-    //
-    // }, [stableGetMovieList, stableGetMovieListForUser, token])
-
 
   useEffect(() => {
       stableGetMovieList(token);

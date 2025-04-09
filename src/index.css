@@ -10,7 +10,15 @@
 
 nav ul{
     display: flex;
+    align-items: center;
     gap: 1rem;
+}
+
+nav ul a:first-child:after{
+    content: "";
+    width: 2px;
+    height: 1rem;
+    background-color: #fff;
 }
 
 .hero-section{
@@ -22,3 +30,50 @@ nav ul{
     font-weight: 600;
 }
 
+.movie-added{
+    background-color: darkseagreen;
+    animation: fadeOut 300ms ease-out forwards 100ms;
+}
+
+@keyframes fadeOut{
+    0%{ opacity: 1}
+    100%{ opacity: 0; display: none}
+}
+
+.more-options{
+    width: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+.more-options:hover{
+    border-radius: .4rem;
+    border: 1px solid #ccc;
+}
+.more-options > *{
+    width: 100%;
+}
+
+.more-options__container{
+    position: relative;
+    width: 100%;
+}
+
+.more-options__options{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    border-radius: .3rem;
+    padding: .3rem;
+
+}
+
+.more-options__options > .option{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: fit-content;
+    gap: .5rem;
+}

@@ -1,13 +1,6 @@
 {
   "movies": [
     {
-      "title": "Halloween III: Season of the Witch",
-      "genre": "Horror, Mystery, Sci-Fi",
-      "isWatched": true,
-      "year": "1982",
-      "id": "tt0085636"
-    },
-    {
       "id": "tt0452594",
       "title": "The Break-Up",
       "genre": "Comedy, Drama, Romance",
@@ -75,10 +68,94 @@
       "password": "5678",
       "movies": [
         {
+          "id": "tt1075417",
+          "title": "Race to Witch Mountain",
+          "genre": "Action, Adventure, Family",
+          "year": "2009",
+          "isWatched": false
+        },
+        {
+          "id": "tt2316204",
+          "title": "Alien: Covenant",
+          "genre": "Horror, Sci-Fi, Thriller",
+          "year": "2017",
+          "isWatched": false
+        },
+        {
+          "id": "tt0086831",
+          "title": "Yes, Prime Minister",
+          "genre": "Comedy",
+          "year": "1986–1987",
+          "isWatched": false
+        },
+        {
+          "id": "tt0103516",
+          "title": "Prime Suspect 2",
+          "genre": "Crime, Drama, Mystery",
+          "year": "1992",
+          "isWatched": false
+        },
+        {
+          "id": "tt0118583",
+          "title": "Alien Resurrection",
+          "genre": "Action, Horror, Sci-Fi",
+          "year": "1997",
+          "isWatched": false
+        },
+        {
           "id": "tt18412256",
           "title": "Alien: Romulus",
           "genre": "Horror, Sci-Fi, Thriller",
           "year": "2024",
+          "isWatched": false
+        },
+        {
+          "id": "tt0370263",
+          "title": "Alien vs. Predator",
+          "genre": "Action, Adventure, Horror",
+          "year": "2004",
+          "isWatched": true
+        },
+        {
+          "id": "tt0103644",
+          "title": "Alien³",
+          "genre": "Action, Horror, Sci-Fi",
+          "year": "1992",
+          "isWatched": false
+        },
+        {
+          "id": "tt0095687",
+          "title": "My Stepmother Is an Alien",
+          "genre": "Comedy, Sci-Fi",
+          "year": "1988",
+          "isWatched": false
+        },
+        {
+          "id": "tt6399092",
+          "title": "Enormous: The Gorge Story",
+          "genre": "Documentary, History, Music",
+          "year": "2019",
+          "isWatched": false
+        },
+        {
+          "id": "tt18272798",
+          "title": "Gorge profonde - Quand le porno est sorti du ghetto",
+          "genre": "Documentary",
+          "year": "2022",
+          "isWatched": false
+        },
+        {
+          "id": "tt0064840",
+          "title": "The Prime of Miss Jean Brodie",
+          "genre": "Comedy, Drama, Romance",
+          "year": "1969",
+          "isWatched": false
+        },
+        {
+          "id": "tt0387514",
+          "title": "Prime",
+          "genre": "Comedy, Drama, Romance",
+          "year": "2005",
           "isWatched": true
         },
         {
@@ -86,9 +163,30 @@
           "title": "The Gorge",
           "genre": "Action, Adventure, Horror",
           "year": "2025",
-          "isWatched": false
+          "isWatched": true
         }
+      ],
+      "lists": [
+        700,
+        905
       ]
+    },
+    {
+      "id": "599",
+      "name": "Lord",
+      "surname": "Semival",
+      "email": "lord@yahoo.com",
+      "password": "1234"
+    }
+  ],
+  "lists": [
+    {
+      "id": 700,
+      "name": "Lama Hovňous"
+    },
+    {
+      "id": 905,
+      "name": "Exciting new list"
     }
   ]
 }
