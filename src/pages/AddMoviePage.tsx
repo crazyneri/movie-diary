@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {containerFlexCol, containerForm, formChild, formGroup, pageTitle} from "../classes/classes";
+import {containerFlexCol, containerForm, formGroup, pageTitle} from "../classes/classes";
 import Button from "../components/Button";
 import MovieSearchResultItem from "../components/MovieSearchResultItem";
 import {MovieDetail} from '../api/types/MovieDetail';
@@ -15,7 +15,7 @@ export default function AddMoviePage()
     const [searchMovies, setSearchMovies] = useState<MovieDetail[]>([]);
     const [term, setTerm] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [addedMovieId, setAddedMovieId] = useState('');
+    const [addedMovieId, setAddedMovieId] = useState< string | number>('');
 
     const {movies} = useMoviesContext();
 
@@ -26,7 +26,7 @@ export default function AddMoviePage()
         setIsLoading(!isLoading);
     }
 
-    const handleTransition = (movie_id: string) => {
+    const handleTransition = (movie_id: string | number) => {
         setAddedMovieId(movie_id);
     }
 
@@ -55,8 +55,8 @@ export default function AddMoviePage()
 
             <form className={containerFlexCol+' '+containerForm} onSubmit={handleSearchSubmit}>
                 <div className={formGroup}>
-                    <label htmlFor="movieName">Movie name</label>
-                    <input className={formChild} id="search" name="search" type="text" value={term} onChange={(e) => setTerm(e.target.value) }/>
+                    <label htmlFor="movieName" className="px-[1rem] py-[.5rem]">Movie name</label>
+                    <input className="search-input" id="search" name="search" type="text" value={term} onChange={(e) => setTerm(e.target.value) } required placeholder="deadpool..."/>
                 </div>
 
                 <Button type="primary">Search a movie</Button>

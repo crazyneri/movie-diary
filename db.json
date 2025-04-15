@@ -1,18 +1,53 @@
 {
   "movies": [
     {
-      "id": "tt0452594",
-      "title": "The Break-Up",
-      "genre": "Comedy, Drama, Romance",
-      "year": "2006",
-      "isWatched": false
+      "id": "tt4263482",
+      "title": "The Witch",
+      "genre": "Drama, Fantasy, Horror",
+      "year": "2015",
+      "isWatched": true,
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTUyNzkwMzAxOF5BMl5BanBnXkFtZTgwMzc1OTk1NjE@._V1_SX300.jpg",
+      "plot": "An isolated Puritan family in 1630s New England comes unraveled by the forces of witchcraft and possession.",
+      "ratings": [
+        {
+          "Source": "Internet Movie Database",
+          "Value": "7.0/10"
+        },
+        {
+          "Source": "Rotten Tomatoes",
+          "Value": "91%"
+        },
+        {
+          "Source": "Metacritic",
+          "Value": "84/100"
+        }
+      ],
+      "actors": "Anya Taylor-Joy, Ralph Ineson, Kate Dickie",
+      "myDescription": "Kinda slow and a bit weird. Probably as intended. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorum eum ipsum nam neque non quas rem? Accusantium ad, aut beatae, cupiditate deserunt dolore earum enim, error facilis fuga id itaque iusto odio pariatur qui quia saepe sapiente tempora ut."
     },
     {
-      "id": "tt0108171",
-      "title": "Sniper",
-      "genre": "Action, Thriller, War",
-      "year": "1993",
-      "isWatched": false
+      "id": "tt13654226",
+      "title": "The Gorge",
+      "genre": "Action, Adventure, Horror",
+      "year": "2025",
+      "isWatched": false,
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTQ5Y2QyYTktYmFmZi00NWJlLWE0MzgtYTA4M2I0ZjQwZjcxXkEyXkFqcGc@._V1_SX300.jpg",
+      "plot": "Two highly-trained operatives become close after being sent to protect opposite sides of a mysterious gorge. When an evil emerges, they must work together to survive what lies within.",
+      "ratings": [
+        {
+          "Source": "Internet Movie Database",
+          "Value": "6.7/10"
+        },
+        {
+          "Source": "Rotten Tomatoes",
+          "Value": "63%"
+        },
+        {
+          "Source": "Metacritic",
+          "Value": "57/100"
+        }
+      ],
+      "actors": "Miles Teller, Anya Taylor-Joy, Sigourney Weaver"
     }
   ],
   "users": [
@@ -68,20 +103,6 @@
       "password": "5678",
       "movies": [
         {
-          "id": "tt1075417",
-          "title": "Race to Witch Mountain",
-          "genre": "Action, Adventure, Family",
-          "year": "2009",
-          "isWatched": false
-        },
-        {
-          "id": "tt2316204",
-          "title": "Alien: Covenant",
-          "genre": "Horror, Sci-Fi, Thriller",
-          "year": "2017",
-          "isWatched": false
-        },
-        {
           "id": "tt0086831",
           "title": "Yes, Prime Minister",
           "genre": "Comedy",
@@ -110,13 +131,6 @@
           "isWatched": false
         },
         {
-          "id": "tt0370263",
-          "title": "Alien vs. Predator",
-          "genre": "Action, Adventure, Horror",
-          "year": "2004",
-          "isWatched": true
-        },
-        {
           "id": "tt0103644",
           "title": "Alien³",
           "genre": "Action, Horror, Sci-Fi",
@@ -138,13 +152,6 @@
           "isWatched": false
         },
         {
-          "id": "tt18272798",
-          "title": "Gorge profonde - Quand le porno est sorti du ghetto",
-          "genre": "Documentary",
-          "year": "2022",
-          "isWatched": false
-        },
-        {
           "id": "tt0064840",
           "title": "The Prime of Miss Jean Brodie",
           "genre": "Comedy, Drama, Romance",
@@ -152,11 +159,26 @@
           "isWatched": false
         },
         {
+          "id": "tt1454468",
+          "title": "Gravity",
+          "genre": "Drama, Sci-Fi, Thriller",
+          "year": "2013",
+          "isWatched": false
+        },
+        {
+          "id": "tt0370263",
+          "title": "Alien vs. Predator",
+          "genre": "Action, Adventure, Horror",
+          "year": "2004",
+          "isWatched": false
+        },
+        {
           "id": "tt0387514",
           "title": "Prime",
           "genre": "Comedy, Drama, Romance",
           "year": "2005",
-          "isWatched": true
+          "isWatched": true,
+          "myDescription": "Very romantic"
         },
         {
           "id": "tt13654226",
@@ -167,8 +189,9 @@
         }
       ],
       "lists": [
-        700,
-        905
+        "440",
+        "478",
+        "82"
       ]
     },
     {
@@ -181,12 +204,20 @@
   ],
   "lists": [
     {
-      "id": 700,
-      "name": "Lama Hovňous"
+      "id": "440",
+      "name": "Melinda",
+      "movies": [
+        "tt13654226",
+        "tt1454468"
+      ]
     },
     {
-      "id": 905,
-      "name": "Exciting new list"
+      "id": "478",
+      "name": "Halloween"
+    },
+    {
+      "id": "82",
+      "name": "Space themed"
     }
   ]
 }

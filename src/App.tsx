@@ -7,6 +7,7 @@ import useMoviesContext from "./hooks/use-movies-context";
 import {useEffect} from "react";
 import useAuthContext from "./hooks/use-auth-context";
 import FriendsMovieListPage from "./pages/FriendsMovieListPage";
+import MoviePage from "./pages/MoviePage";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/my-lists',
         element: <FriendsMovieListPage/>
+      },
+      {
+        path: '/movies/:slug',
+        element: <MoviePage/>
       }
     ]
   }
@@ -39,10 +44,10 @@ function App() {
   const {token} = useAuthContext();
 
   useEffect(() => {
+
       stableGetMovieList(token);
 
   }, [stableGetMovieList, token])
-
 
 
   return <RouterProvider router={router}/>

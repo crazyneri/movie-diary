@@ -9,7 +9,9 @@ export default function Header()
 {
     const {user, logout} = useAuthContext();
     // use to reset when displaying modal - cancel btn - idleTimer.reset()
-    const {idleTimer} = useIdleTimout({idleTime:1});
+    useIdleTimout({idleTime:1800});
+
+
     const greetUser = () =>{
         if(user?.name)
         {

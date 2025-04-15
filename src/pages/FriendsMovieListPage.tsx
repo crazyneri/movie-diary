@@ -1,11 +1,12 @@
 import {containerFlexCol, containerForm, formGroup, formChild, pageTitle} from '../classes/classes';
 import useAuthContext from "../hooks/use-auth-context";
 import {FriendsMovieListDetail} from "../api/types/FriendsMovieListDetail";
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 import {getMovieListsForUser, createMovieList} from "../api/queries/friends-movie-list";
 import Button from "../components/Button";
 import {FilmIcon, TvIcon} from "@heroicons/react/24/outline";
 import {useNavigate} from "react-router-dom";
+import FriendsListItem from "../components/FriendsListItem";
 
 export default function FriendsMovieListPage(){
     const {user} = useAuthContext();
@@ -18,23 +19,22 @@ export default function FriendsMovieListPage(){
     const [formData, setFormData] = useState<FriendsMovieListDetail | {}>({});
     const [movieLists, setMovieLists] = useState<FriendsMovieListDetail[] | []>([]);
     const [submitSuccess, setSubmitSuccess] = useState(false);
-    const stableGetMovieListsForUser = useCallback(getMovieListsForUser, []);
+
 
     useEffect(() => {
-        const getLists = async () => {
-            const lists = await stableGetMovieListsForUser();
+        const fetchLists = async () => {
+            const lists = await getMovieListsForUser();
             if(lists !== undefined)
             {
                 setMovieLists(lists);
             }
+        }
+        fetchLists();
 
-        };
-        getLists();
-
-    }, [stableGetMovieListsForUser])
+    }, [])
 
     const renderedLists = movieLists.map(list => {
-        return <div className={formChild + ' md:w-[70%] lg:w-[50%]'} key={list.id}>{list.name}</div>
+        return <FriendsListItem key={list.id} list={list}/>
     });
 
     const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,8 @@ export default function FriendsMovieListPage(){
             const result = await createMovieList(formData);
             if(result){
                 setSubmitSuccess(true);
-                setMovieLists([...movieLists, formData])
+                setMovieLists([...movieLists, formData]);
+
             }
         }
     }
@@ -74,14 +75,19 @@ export default function FriendsMovieListPage(){
                 </div>
                 <div className={formGroup}>
                     <label htmlFor="list-name">Name of your list</label>
-                    <input id="list-name" type="text" name="name" className={formChild} onChange={handleFormValue} required/>
+                    <input id="list-name" type="text" name="name" className={formChild} onChange={handleFormValue} required placeholder="Halloween themed"/>
                 </div>
 
                 <Button type="primary">Submit</Button>
             </form>
         }
 
-        <h2>Existing lists</h2>
-        {renderedLists}
+
+        <div className="flex flex-col items-center max-h-[50vh] overflow-auto w-full">
+            <h2>Existing lists</h2>
+            <ul className="w-full md:w-[70%] lg:w-[50%]">{renderedLists}</ul>
+        </div>
+
+
     </div>;
 }

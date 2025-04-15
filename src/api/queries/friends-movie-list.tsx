@@ -10,7 +10,7 @@ export const createMovieList = async (movieList: FriendsMovieListDetail) => {
         const userId = getLoggedInUserId();
         if(!userId) return false;
 
-        movieList.id = getRandomId();
+        movieList.id = getRandomId().toString();
         const result = await axios.post(`${lists_url}`, movieList);
         const listStatus = result.status === 201 || result.status === 200;
         let userStatus = false;
@@ -25,6 +25,23 @@ export const createMovieList = async (movieList: FriendsMovieListDetail) => {
     }
 
 
+}
+
+export const addMovieToList = async (movieId: number | string, list:FriendsMovieListDetail) => {
+
+    try{
+        if(!list?.movies || list.movies.length === 0)
+        {
+            list.movies = [movieId.toString()];
+        }else{
+            list.movies.push(movieId.toString())
+        }
+
+        const result = await axios.put(`${lists_url}/${list.id}`, list);
+        return result.status;
+    }catch(e){
+        throw new Error(`failed to add movie to list: ${e}`);
+    }
 }
 
 const saveMovieListForUser = async (userId: string | number, movieListId: string) => {
@@ -49,10 +66,12 @@ export const getMovieListsForUser = async () => {
     const userResult = await axios.get(`${user_url}/${userId}`);
     const userData = userResult.data;
 
+
     if(!userData?.lists || userData.lists.length === 0) return [];
 
     const movieListsResult = await axios.get(`${lists_url}`);
     const listsData = movieListsResult.data as FriendsMovieListDetail[];
+
 
     return listsData.filter(list => {
         if(userData.lists.indexOf(list.id) > -1)
@@ -60,5 +79,16 @@ export const getMovieListsForUser = async () => {
             return list;
         }
     });
+
+}
+
+export const getMoviesForList = async (listId: string | number | undefined) =>{
+    if(listId !== undefined)
+    {
+        const result = await axios.get(`${lists_url}/${listId}`);
+        return !result.data?.movies ? [] : result.data.movies;
+    }else{
+        throw new Error("No list id provided");
+    }
 
 }

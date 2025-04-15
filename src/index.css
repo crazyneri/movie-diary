@@ -1,11 +1,48 @@
 @import "tailwindcss";
 
+
+:root{
+    --body-color: #FBFFFE;
+    --navbar-color: #AE8FB1;
+    --article-hovered-text: #889AD3;
+    --article-hovered-bg: #BDDFFF;
+    --main-dark: #434E74;
+    --shadow-subtle: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+    --shadow-bottom: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+body{
+    background-color: var(--body-color);
+}
 .header{
     display: flex;
     justify-content: space-between;
-    padding: .5rem 1rem;
-    background-color: darksalmon;
+    padding: .5rem 2rem;
+    /*background-color: darksalmon;*/
+    background-color: var(--navbar-color);
     color: ghostwhite;
+    max-width: 100rem;
+    margin: .7rem 1rem 0;
+    border-radius: 3rem;
+}
+
+.article,
+.article--search{
+    box-shadow: var(--shadow-subtle);
+    margin-bottom: .7rem;
+}
+
+.article--search:hover,
+.article:hover{
+    background-color: var(--article-hovered-bg);
+}
+
+.article__hovered-text{
+    color: var(--article-hovered-text);
+}
+
+.article__hovered-text:hover{
+    color: var(--main-dark);
 }
 
 nav ul{
@@ -64,16 +101,58 @@ nav ul a:first-child:after{
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    min-width: 9rem;
     border-radius: .3rem;
-    padding: .3rem;
-
+    padding: .4rem;
+    background-color: var(--body-color);
+    box-shadow: var(--shadow-subtle);
+    z-index: 5;
 }
 
-.more-options__options > .option{
+.more-options__options > .option,
+.more-options__list > .option{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     min-width: fit-content;
     gap: .5rem;
+}
+
+.btn--main{
+    border-radius: 3rem;
+    width: 100%;
+    padding: .4rem 1rem;
+    font-size: 1.1rem;
+    transition: scale 300ms linear;
+}
+
+.btn--main-accent{
+    background-color: var(--main-dark);
+    color: var(--body-color);
+    width: 85%;
+    margin: 1rem auto;
+    box-shadow: var(--shadow-bottom);
+}
+
+.btn--main:hover{
+    opacity: .8;
+}
+
+.btn--main:hover:active{
+    scale: .9;
+}
+
+.search-input{
+    border-radius: 2rem;
+    box-shadow: var(--shadow-subtle);
+    padding: .7em 1.5rem;
+    width: 100%;
+}
+
+.search-input:focus{
+    outline: 2px solid var(--article-hovered-bg);
+    /*border: 2px solid var(--article-hovered-bg);*/
 }

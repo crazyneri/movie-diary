@@ -17,7 +17,7 @@ export default function Login({hideLogin}:voidFunction)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if("email" in formData)
+        if("email" in formData && "password" in formData)
         {
             await login(formData);
 
@@ -43,7 +43,7 @@ export default function Login({hideLogin}:voidFunction)
 
         <Button type="primary">Submit</Button>
 
-        <span onClick={hideLogin} className="text-sm border-b mt-[0.8rem] px-[0.3rem] cursor-default">Sign up</span>
+        <span onClick={hideLogin} className="text-sm border-b mt-[0.8rem] px-[0.3rem] cursor-default">Not a member yet? Sign up here!</span>
     </form>
 
 }

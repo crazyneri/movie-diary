@@ -19,10 +19,9 @@ function sortMoviesByWatched(movies:MovieDetail[])
 export interface MovieContext {
     movies: MovieDetail[],
     stableGetMovieList: (id?: string | number) => {};
-    // stableGetMovieListForUser: (id: string) => {};
     setMovies: React.Dispatch<React.SetStateAction<MovieDetail[]>>,
     createMovie: ({movie, userId}:{movie: MovieDetail, userId: string | number}) => Promise<void>;
-    editMovie: ({movie, userId}: {movie: MovieDetail, userId: string | number }) => Promise<void>;
+    editMovie: ({movie, userId}: {movie: MovieDetail, userId?: string | number }) => Promise<void>;
     deleteMovieById: ({movie, userId}:{movie:MovieDetail; userId?: string | number}) => Promise<void>;
 }
 
@@ -35,6 +34,7 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
 
     const getMovieList = async (id?: string | number) => {
         let foundMovies;
+
         if(!id)
         {
             const result = await axios.get(`${url}/movies`);
@@ -73,7 +73,7 @@ export default function MoviesProvider (props: React.PropsWithChildren<{}>){
         setMovies(updatedMovies);
     }
 
-    const editMovie = async ({movie, userId = 0}: {movie: MovieDetail, userId: number | string}) => {
+    const editMovie = async ({movie, userId = 0}: {movie: MovieDetail, userId?: number | string}) => {
         let updatedMovies: MovieDetail[];
 
         if(userId === 0 || userId === '')

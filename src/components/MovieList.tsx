@@ -1,16 +1,18 @@
 import useMoviesContext from "../hooks/use-movies-context";
 import MovieListItem from './MovieListItem';
-import {containerForm, containerFlex} from '../classes/classes';
+import {containerFlex, containerCentered} from '../classes/classes';
 import {useState} from "react";
 import Modal from './Modal';
 import {MovieDetail} from "../api/types/MovieDetail";
 import Button from "./Button";
 import useAuthContext from "../hooks/use-auth-context";
 import MovieListSearch from "./MovieListSearch";
+import EditMovieListItem from "./forms/EditMovieListItem";
 
 export default function MovieList()
 {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [modalBody, setModalBody] = useState('');
     const [activeMovie, setActiveMovie] = useState<MovieDetail>();
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -18,7 +20,8 @@ export default function MovieList()
     const {token} = useAuthContext();
 
 
-    const openPopup = (movie:MovieDetail) => {
+    const openPopup = (movie:MovieDetail, action: string) => {
+        setModalBody(action);
         setIsOpen(!isOpen);
         setActiveMovie(movie);
     }
@@ -33,6 +36,25 @@ export default function MovieList()
             await deleteMovieById({movie:activeMovie, userId: token});
             setIsOpen(false);
         }
+    }
+
+    let modalContent = <div></div>;
+    switch(modalBody){
+        case 'delete':
+            modalContent = <>
+                        <div className={containerFlex + ' gap-[0.3rem] items-baseline'}>
+                        <p>Do you want to delete</p>
+                        <span className="font-semibold text-lg">{activeMovie && activeMovie.title}?</span>
+                        </div>
+                        <div className={containerFlex + ' gap-[1rem] max-w-lg mx-auto'}>
+                            <Button type="cancel" onClick={closePopup}>Cancel</Button>
+                            <Button type="danger" onClick={deleteSelectedMovie}>Delete</Button>
+                        </div>
+                        </>;
+            break;
+        case 'edit':
+            modalContent = <EditMovieListItem movie={activeMovie} closePopup={closePopup}/>;
+            break;
     }
 
 
@@ -50,20 +72,13 @@ export default function MovieList()
 
     })
 
-    const container = movies.length > 0 ? renderedMovies : 'No movies added in the list';
+    const movieListContainer = movies.length > 0 ? renderedMovies : 'No movies added in the list';
 
-    return <div className={containerForm + ' flex flex-col gap-[1rem] max-h-[80vh] overflow-y-auto'}>
-        {renderedMovies.length !== 0 && <MovieListSearch onSearch={setSearchTerm}/>}
-        {container}
+    return <div className={containerCentered + ' flex flex-col gap-[1rem] max-h-[80vh] overflow-y-auto pb-[3rem]'}>
+        {renderedMovies.length !== 0 && <MovieListSearch searchTerm={searchTerm} onSearch={setSearchTerm}/>}
+        {movieListContainer}
         {isOpen && <Modal onClose={closePopup}>
-            <div className={containerFlex + ' gap-[0.3rem] items-baseline'}>
-                <p>Do you want to delete</p>
-                <span className="font-semibold text-lg">{activeMovie && activeMovie.title}?</span>
-            </div>
-            <div className={containerFlex + ' gap-[1rem] max-w-lg mx-auto'}>
-                <Button type="cancel" onClick={closePopup}>Cancel</Button>
-                <Button type="danger" onClick={deleteSelectedMovie}>Delete</Button>
-            </div>
+            {modalContent}
         </Modal>}
     </div>
 }

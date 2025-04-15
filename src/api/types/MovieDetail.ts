@@ -3,9 +3,18 @@ export interface MovieDetail {
     title: string,
     genre: string,
     year: string,
-    isWatched: boolean
+    isWatched: boolean,
+    plot?: string,
+    myDescription?: string,
+    poster?: string,
+    ratings?: {
+        Source: string,
+        Value: string
+    }[],
+    actors: string
 }
 
-export interface MovieListItemDetail {
-    movie: MovieDetail
+export interface EditMovieDetail{
+    myDescription: string
 }
+

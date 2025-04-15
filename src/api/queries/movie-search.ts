@@ -4,7 +4,9 @@ interface MovieSearchDetail{
     "Search": {
         "Title": string,
         "imdbID": string,
-        "Poster": string
+        "Poster": string,
+        "Type": string,
+        "Year": string
     }[]
 }
 
@@ -12,7 +14,17 @@ interface MovieSearchID{
     "Title": string,
     "Year": string,
     "Genre": string,
-    "imdbID": string
+    "imdbID": string,
+    "Actors": string,
+    "Country": string,
+    "Director": string,
+    "Plot": string,
+    "Poster": string,
+    "Ratings": {
+        "Source": string,
+        "Value": string
+    }[],
+    "Runtime": string
 }
 
 export const searchMovie = async (term: string) =>{
@@ -21,7 +33,7 @@ export const searchMovie = async (term: string) =>{
     const result = await fetch(url);
     const data: MovieSearchDetail = await result.json();
 
-    return await movieDetails(data);
+    return movieDetails(data);
 }
 
 const movieDetails = async (movies: MovieSearchDetail) => {
@@ -33,7 +45,11 @@ const movieDetails = async (movies: MovieSearchDetail) => {
             title: data.Title,
             genre: data.Genre,
             year: data.Year,
-            isWatched: false
+            isWatched: false,
+            poster: data.Poster,
+            plot: data.Plot,
+            ratings: data.Ratings,
+            actors: data.Actors
         };
     })) ;
 

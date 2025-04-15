@@ -4,10 +4,9 @@ import {MovieDetail} from "../api/types/MovieDetail";
 import {PlusIcon} from '@heroicons/react/24/outline';
 import useMoviesContext from "../hooks/use-movies-context"
 import useAuthContext from "../hooks/use-auth-context";
-import {UserMovieDetail} from "../api/types/UserDetail";
 
 
-export default function MovieSearchResultItem({movie, classes, onAdded}: {movie: MovieDetail, classes: string, onAdded: (id:string) => void})
+export default function MovieSearchResultItem({movie, classes, onAdded}: {movie: MovieDetail, classes: string, onAdded: (id: string | number) => void})
 {
     const [isAdded, setIsAdded] = useState<boolean>(false);
     const {createMovie} = useMoviesContext();
@@ -15,18 +14,10 @@ export default function MovieSearchResultItem({movie, classes, onAdded}: {movie:
 
     const handleClick = async () => {
         setIsAdded(!isAdded);
+        const userId = token ? token : 0;
+        await createMovie({movie, userId});
 
-        const userMovie: UserMovieDetail = {
-            movie
-        }
-        if(token)
-        {
-            userMovie.userId = token;
-        }
-
-        await createMovie(userMovie);
-        onAdded(userMovie.movie.id);
-
+        onAdded(movie.id);
     }
 
     const htmlSpan = isAdded ?
@@ -35,7 +26,7 @@ export default function MovieSearchResultItem({movie, classes, onAdded}: {movie:
 
 
 
-    return <div className={formChild+' hover:bg-emerald-400 '+classes}>
+    return <div className={formChild+' article--search '+classes}>
         <div className="flex justify-between mb-[0.5rem]">
             <h2 className={itemTitle}>{movie && movie.title}</h2>
             {htmlSpan}
