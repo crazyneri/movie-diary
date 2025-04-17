@@ -1,5 +1,4 @@
 import {JSX} from 'react';
-import {containerFlexCol} from "../classes/classes";
 import {default as moreOptionsIcon} from '../assets/svg/more_options.svg';
 export default function MoreOptions(props: {children: JSX.Element; isOpen: boolean; handleOpen: () => void})
 {
@@ -10,7 +9,7 @@ export default function MoreOptions(props: {children: JSX.Element; isOpen: boole
         handleOpen();
     }
 
-    return <div className={containerFlexCol + ' gap-[0.5rem] justify-end'}>
+    return <div className="flex flex-col items-center justify-end">
     <button type="button" aria-label="More options" aria-haspopup="true" aria-expanded={isOpen} className="more-options" title="more options" onClick={handleClick}><img src={moreOptionsIcon} alt="more options icon"/></button>
 
         <div className="more-options__container">

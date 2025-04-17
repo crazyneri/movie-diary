@@ -1,31 +1,6 @@
 {
   "movies": [
     {
-      "id": "tt4263482",
-      "title": "The Witch",
-      "genre": "Drama, Fantasy, Horror",
-      "year": "2015",
-      "isWatched": true,
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTUyNzkwMzAxOF5BMl5BanBnXkFtZTgwMzc1OTk1NjE@._V1_SX300.jpg",
-      "plot": "An isolated Puritan family in 1630s New England comes unraveled by the forces of witchcraft and possession.",
-      "ratings": [
-        {
-          "Source": "Internet Movie Database",
-          "Value": "7.0/10"
-        },
-        {
-          "Source": "Rotten Tomatoes",
-          "Value": "91%"
-        },
-        {
-          "Source": "Metacritic",
-          "Value": "84/100"
-        }
-      ],
-      "actors": "Anya Taylor-Joy, Ralph Ineson, Kate Dickie",
-      "myDescription": "Kinda slow and a bit weird. Probably as intended. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorum eum ipsum nam neque non quas rem? Accusantium ad, aut beatae, cupiditate deserunt dolore earum enim, error facilis fuga id itaque iusto odio pariatur qui quia saepe sapiente tempora ut."
-    },
-    {
       "id": "tt13654226",
       "title": "The Gorge",
       "genre": "Action, Adventure, Horror",
@@ -48,6 +23,30 @@
         }
       ],
       "actors": "Miles Teller, Anya Taylor-Joy, Sigourney Weaver"
+    },
+    {
+      "id": "tt4263482",
+      "title": "The Witch",
+      "genre": "Drama, Fantasy, Horror",
+      "year": "2015",
+      "isWatched": true,
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTUyNzkwMzAxOF5BMl5BanBnXkFtZTgwMzc1OTk1NjE@._V1_SX300.jpg",
+      "plot": "An isolated Puritan family in 1630s New England comes unraveled by the forces of witchcraft and possession.",
+      "ratings": [
+        {
+          "Source": "Internet Movie Database",
+          "Value": "7.0/10"
+        },
+        {
+          "Source": "Rotten Tomatoes",
+          "Value": "91%"
+        },
+        {
+          "Source": "Metacritic",
+          "Value": "84/100"
+        }
+      ],
+      "actors": "Anya Taylor-Joy, Ralph Ineson, Kate Dickie"
     }
   ],
   "users": [
@@ -103,95 +102,94 @@
       "password": "5678",
       "movies": [
         {
-          "id": "tt0086831",
-          "title": "Yes, Prime Minister",
-          "genre": "Comedy",
-          "year": "1986–1987",
-          "isWatched": false
-        },
-        {
-          "id": "tt0103516",
-          "title": "Prime Suspect 2",
-          "genre": "Crime, Drama, Mystery",
-          "year": "1992",
-          "isWatched": false
-        },
-        {
           "id": "tt0118583",
           "title": "Alien Resurrection",
           "genre": "Action, Horror, Sci-Fi",
           "year": "1997",
-          "isWatched": false
+          "isWatched": false,
+          "poster": "https://m.media-amazon.com/images/M/MV5BNDMyNmU5ZGQtNzhiZi00NjRjLTk3NGUtMmQ5YWU4ODlkNTBhXkEyXkFqcGc@._V1_SX300.jpg",
+          "plot": "Two centuries after her death, a powerful human/alien hybrid clone of Ellen Ripley aids a crew of space pirates in stopping the aliens from reaching Earth.",
+          "ratings": [
+            {
+              "Source": "Internet Movie Database",
+              "Value": "6.2/10"
+            },
+            {
+              "Source": "Rotten Tomatoes",
+              "Value": "55%"
+            },
+            {
+              "Source": "Metacritic",
+              "Value": "62/100"
+            }
+          ],
+          "actors": "Sigourney Weaver, Winona Ryder, Dominique Pinon"
         },
         {
           "id": "tt18412256",
           "title": "Alien: Romulus",
           "genre": "Horror, Sci-Fi, Thriller",
           "year": "2024",
-          "isWatched": false
+          "isWatched": false,
+          "poster": "https://m.media-amazon.com/images/M/MV5BMDU0NjcwOGQtNjNjOS00NzQ3LWIwM2YtYWVmODZjMzQzN2ExXkEyXkFqcGc@._V1_SX300.jpg",
+          "plot": "While scavenging the deep ends of a derelict space station, a group of young space colonists come face to face with the most terrifying life form in the universe.",
+          "ratings": [
+            {
+              "Source": "Internet Movie Database",
+              "Value": "7.1/10"
+            },
+            {
+              "Source": "Rotten Tomatoes",
+              "Value": "80%"
+            },
+            {
+              "Source": "Metacritic",
+              "Value": "64/100"
+            }
+          ],
+          "actors": "Cailee Spaeny, David Jonsson, Archie Renaux"
         },
         {
-          "id": "tt0103644",
-          "title": "Alien³",
-          "genre": "Action, Horror, Sci-Fi",
-          "year": "1992",
-          "isWatched": false
+          "id": "tt6612630",
+          "title": "Deadpool: No Good Deed",
+          "genre": "Short, Comedy, Crime",
+          "year": "2017",
+          "isWatched": false,
+          "poster": "https://m.media-amazon.com/images/M/MV5BM2IzODI5YTQtNTQ0NS00Y2U5LTk4ZWMtOTI0ZDI4OWUxZjdhXkEyXkFqcGc@._V1_SX300.jpg",
+          "plot": "Deadpool sees an opportunity to save the day, but it doesn't go entirely as planned.",
+          "ratings": [
+            {
+              "Source": "Internet Movie Database",
+              "Value": "8.0/10"
+            }
+          ],
+          "actors": "Ryan Reynolds, Stan Lee",
+          "myDescription": "Superb. Would watch again. I laughed out loud."
         },
         {
-          "id": "tt0095687",
-          "title": "My Stepmother Is an Alien",
-          "genre": "Comedy, Sci-Fi",
-          "year": "1988",
-          "isWatched": false
-        },
-        {
-          "id": "tt6399092",
-          "title": "Enormous: The Gorge Story",
-          "genre": "Documentary, History, Music",
-          "year": "2019",
-          "isWatched": false
-        },
-        {
-          "id": "tt0064840",
-          "title": "The Prime of Miss Jean Brodie",
-          "genre": "Comedy, Drama, Romance",
-          "year": "1969",
-          "isWatched": false
-        },
-        {
-          "id": "tt1454468",
-          "title": "Gravity",
-          "genre": "Drama, Sci-Fi, Thriller",
-          "year": "2013",
-          "isWatched": false
-        },
-        {
-          "id": "tt0370263",
-          "title": "Alien vs. Predator",
-          "genre": "Action, Adventure, Horror",
-          "year": "2004",
-          "isWatched": false
-        },
-        {
-          "id": "tt0387514",
-          "title": "Prime",
-          "genre": "Comedy, Drama, Romance",
-          "year": "2005",
+          "id": "tt0078748",
+          "title": "Alien",
+          "genre": "Horror, Sci-Fi",
+          "year": "1979",
           "isWatched": true,
-          "myDescription": "Very romantic"
-        },
-        {
-          "id": "tt13654226",
-          "title": "The Gorge",
-          "genre": "Action, Adventure, Horror",
-          "year": "2025",
-          "isWatched": true
+          "poster": "https://m.media-amazon.com/images/M/MV5BN2NhMDk2MmEtZDQzOC00MmY5LThhYzAtMDdjZGFjOGZjMjdjXkEyXkFqcGc@._V1_SX300.jpg",
+          "plot": "After investigating a mysterious transmission of unknown origin, the crew of a commercial spacecraft encounters a deadly lifeform.",
+          "ratings": [
+            {
+              "Source": "Internet Movie Database",
+              "Value": "8.5/10"
+            },
+            {
+              "Source": "Rotten Tomatoes",
+              "Value": "93%"
+            },
+            {
+              "Source": "Metacritic",
+              "Value": "89/100"
+            }
+          ],
+          "actors": "Sigourney Weaver, Tom Skerritt, John Hurt"
         }
-      ],
-      "lists": [
-        "440",
-        "478",
-        "82"
       ]
     },
     {
@@ -204,20 +202,14 @@
   ],
   "lists": [
     {
-      "id": "440",
-      "name": "Melinda",
+      "id": "965",
+      "name": "Halloween",
+      "users": [
+        "139"
+      ],
       "movies": [
-        "tt13654226",
-        "tt1454468"
+        "tt6612630"
       ]
-    },
-    {
-      "id": "478",
-      "name": "Halloween"
-    },
-    {
-      "id": "82",
-      "name": "Space themed"
     }
   ]
 }

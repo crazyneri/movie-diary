@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import useMoviesContext from "../hooks/use-movies-context";
 import {containerFlexCol, pageTitle} from "../classes/classes";
+import Button from "../components/Button";
 
 
 export default function MoviePage()
@@ -29,7 +30,7 @@ export default function MoviePage()
 
                         <div className="flex-2 flex flex-col gap-[1rem]">
                             <p className="text-sm font-semibold">{movie.genre}</p>
-
+                            <p className="text-sm">{movie.year}</p>
                             <p>{movie.plot}</p>
                             <div className="flex">
                                 <h3 className="mr-[.5rem] font-semibold">Actors:</h3>
@@ -45,7 +46,7 @@ export default function MoviePage()
 
                     </div>
                     <div className="mt-[2rem]">
-                        <p>{movie.myDescription}</p>
+                        <p>{movie.myDescription || <div className="max-w-md"><Button type="primary">Add description</Button></div>}</p>
                     </div>
                 </div>
 

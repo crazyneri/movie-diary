@@ -1,24 +1,69 @@
 import useMoviesContext from "../hooks/use-movies-context";
 import MovieListItem from './MovieListItem';
 import {containerFlex, containerCentered} from '../classes/classes';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Modal from './Modal';
 import {MovieDetail} from "../api/types/MovieDetail";
 import Button from "./Button";
 import useAuthContext from "../hooks/use-auth-context";
 import MovieListSearch from "./MovieListSearch";
 import EditMovieListItem from "./forms/EditMovieListItem";
+import {FriendsMovieListDetail} from "../api/types/FriendsMovieListDetail";
+import {getListMoviesById} from "../api/queries/movie-search";
+import {useNavigate} from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 
-export default function MovieList()
+const getRenderedMovies = (movies:MovieDetail[], searchTerm:string, openPopup:(movie:MovieDetail, action:string) => void) => {
+    const renderedMovies = movies.map((movie, index) => {
+        if(searchTerm === '')
+        {
+            return <MovieListItem key={index} movie={movie} open={openPopup}/>
+        }else{
+            if(movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            {
+                return <MovieListItem key={index} movie={movie} open={openPopup}/>
+            }
+        }
+
+    });
+
+    return renderedMovies;
+}
+
+export default function MovieList({list}: { list: FriendsMovieListDetail | null })
 {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [modalBody, setModalBody] = useState('');
     const [activeMovie, setActiveMovie] = useState<MovieDetail>();
     const [searchTerm, setSearchTerm] = useState('');
+    const [listMovies, setListMovies] = useState<MovieDetail[] | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { movies, deleteMovieById } = useMoviesContext();
     const {token} = useAuthContext();
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        if(list)
+        {
+            if(!token)
+            {
+                navigate('/');
+            }
+            const movieIds = list?.movies;
+            const fetchMovies = async () => {
+                await getListMoviesById(movieIds).then((data:MovieDetail[]) => {
+                    setListMovies(data);
+                    setIsLoading(false);
+
+                })
+            }
+            fetchMovies();
+        }else{
+            setListMovies(null);
+            setIsLoading(false);
+        }
+    },[list?.id, token])
 
     const openPopup = (movie:MovieDetail, action: string) => {
         setModalBody(action);
@@ -58,25 +103,27 @@ export default function MovieList()
     }
 
 
+    const renderedMovies = listMovies === null ? getRenderedMovies(movies, searchTerm, openPopup) : getRenderedMovies(listMovies, searchTerm, openPopup);
 
-    const renderedMovies = movies.map((movie, index) => {
-        if(searchTerm === '')
-        {
-            return <MovieListItem key={index} movie={movie} open={openPopup}/>
-        }else{
-            if(movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
-            {
-                return <MovieListItem key={index} movie={movie} open={openPopup}/>
-            }
-        }
+    console.log('movies',renderedMovies);
 
-    })
 
-    const movieListContainer = movies.length > 0 ? renderedMovies : 'No movies added in the list';
+    const movieListContainer = renderedMovies.length > 0 ? renderedMovies : 'No movies added in the list';
 
     return <div className={containerCentered + ' flex flex-col gap-[1rem] max-h-[80vh] overflow-y-auto pb-[3rem]'}>
         {renderedMovies.length !== 0 && <MovieListSearch searchTerm={searchTerm} onSearch={setSearchTerm}/>}
-        {movieListContainer}
+        {isLoading ?
+            <div className="flex justify-center">
+                <ClipLoader
+                    color="#e9967a"
+                    loading={isLoading}
+                    size={60}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
+            :
+        movieListContainer}
         {isOpen && <Modal onClose={closePopup}>
             {modalContent}
         </Modal>}

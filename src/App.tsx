@@ -24,6 +24,10 @@ const router = createBrowserRouter([
         element: <MoviesListPage/>
       },
       {
+        path: '/movie-list/:id',
+        element: <MoviesListPage/>
+      },
+      {
         path: '/add-movie',
         element: <AddMoviePage/>
       },

@@ -56,6 +56,31 @@ const movieDetails = async (movies: MovieSearchDetail) => {
     return moviesResult;
 }
 
+export const getListMoviesById = async (movieIds?: string[]) => {
+    if(movieIds)
+    {
+        const moviesResult: MovieDetail[] = await Promise.all(movieIds.map(async movieID => {
+            const data: MovieSearchID = await searchById(movieID);
+            return{
+                id: data.imdbID,
+                title: data.Title,
+                genre: data.Genre,
+                year: data.Year,
+                isWatched: false,
+                poster: data.Poster,
+                plot: data.Plot,
+                ratings: data.Ratings,
+                actors: data.Actors
+            }
+        }));
+
+        return moviesResult;
+    }
+
+    return [];
+
+}
+
 const searchById = async (movieId: string) => {
     const url = `http://www.omdbapi.com/?apikey=${omdbapi}&i=`;
     const result = await fetch(url+movieId);

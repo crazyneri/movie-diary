@@ -7,6 +7,7 @@
     --article-hovered-text: #889AD3;
     --article-hovered-bg: #BDDFFF;
     --main-dark: #434E74;
+
     --shadow-subtle: rgba(0, 0, 0, 0.09) 0px 3px 12px;
     --shadow-bottom: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
@@ -100,7 +101,7 @@ nav ul a:first-child:after{
 .more-options__options{
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     gap: .4rem;
@@ -135,6 +136,13 @@ nav ul a:first-child:after{
     width: 85%;
     margin: 1rem auto;
     box-shadow: var(--shadow-bottom);
+}
+
+.btn--secondary-accent{
+    background-color: var(--article-hovered-text);
+    color: var(--body-color);
+    width: 85%;
+    margin: 1rem auto;
 }
 
 .btn--main:hover{

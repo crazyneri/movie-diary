@@ -1,6 +1,6 @@
 const cannotRemember = [
-    ["cursor-pointer"],
-    ["flex", "justify-between"],
+    ["cursor-pointer", "cursor-default"],
+    ["flex", "justify-between", "items-center", "grow"],
     ["text-xs","text-sm", "text-lg", "text-2xl", "text-3xl"],
     ["font-semibold", "font-medium"],
     ["max-w-lg", "32rem"],

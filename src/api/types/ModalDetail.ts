@@ -1,7 +1,7 @@
 import {MovieDetail} from "./MovieDetail";
 
 export interface ModalDetail{
-    onClose: () => void,
+    onClose: (e:React.MouseEvent) => void,
     children: React.ReactNode
 }
 

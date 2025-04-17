@@ -1,12 +1,13 @@
-import {containerFlexCol, containerForm, formGroup, formChild, pageTitle} from '../classes/classes';
+import {containerFlexCol, containerForm, formGroup, formChild, pageTitle, containerFlex} from '../classes/classes';
 import useAuthContext from "../hooks/use-auth-context";
 import {FriendsMovieListDetail} from "../api/types/FriendsMovieListDetail";
 import {useState, useEffect} from 'react';
-import {getMovieListsForUser, createMovieList} from "../api/queries/friends-movie-list";
+import {getMovieListsForUser, createMovieList, deleteList} from "../api/queries/friends-movie-list";
 import Button from "../components/Button";
 import {FilmIcon, TvIcon} from "@heroicons/react/24/outline";
 import {useNavigate} from "react-router-dom";
 import FriendsListItem from "../components/FriendsListItem";
+import Modal from "../components/Modal";
 
 export default function FriendsMovieListPage(){
     const {user} = useAuthContext();
@@ -20,6 +21,12 @@ export default function FriendsMovieListPage(){
     const [movieLists, setMovieLists] = useState<FriendsMovieListDetail[] | []>([]);
     const [submitSuccess, setSubmitSuccess] = useState(false);
 
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [activeList, setActiveList] = useState<FriendsMovieListDetail | null>(null);
+    const [modalAction, setModalAction] = useState('');
+
+
+
 
     useEffect(() => {
         const fetchLists = async () => {
@@ -31,10 +38,17 @@ export default function FriendsMovieListPage(){
         }
         fetchLists();
 
-    }, [])
+    }, [isOpenModal]);
+
+
+    const handleModal = (list:FriendsMovieListDetail, action:string) => {
+        setIsOpenModal(true);
+        setActiveList(list);
+        setModalAction(action);
+    }
 
     const renderedLists = movieLists.map(list => {
-        return <FriendsListItem key={list.id} list={list}/>
+        return <FriendsListItem key={list.id} list={list} openModal={handleModal}/>
     });
 
     const handleFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +67,33 @@ export default function FriendsMovieListPage(){
             }
         }
     }
+
+    const handleDeleteList = async () => {
+        await deleteList(activeList);
+        setIsOpenModal(false);
+    }
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+    }
+
+    let modalContent = <div></div>;
+
+    if(modalAction === 'delete')
+    {
+        modalContent = <>
+                    <div className={containerFlex + ' gap-[0.3rem] items-baseline'}>
+                        <p>Do you want to delete</p>
+                        <span className="font-semibold text-lg">{activeList && activeList.name}?</span>
+                    </div>
+                    <div className={containerFlex + ' gap-[1rem] max-w-lg mx-auto'}>
+                        <Button type="cancel" onClick={closeModal}>Cancel</Button>
+                        <Button type="danger" onClick={handleDeleteList}>Delete</Button>
+                    </div>
+                </>;
+    }
+
+
 
     return <div className={containerFlexCol}>
         <div className="flex items-center">
@@ -83,11 +124,11 @@ export default function FriendsMovieListPage(){
         }
 
 
-        <div className="flex flex-col items-center max-h-[50vh] overflow-auto w-full">
+        <div className="flex flex-col items-center max-h-[50%] overflow-y-auto w-full pb-[2rem]">
             <h2>Existing lists</h2>
             <ul className="w-full md:w-[70%] lg:w-[50%]">{renderedLists}</ul>
         </div>
 
-
+        {isOpenModal && <Modal onClose={closeModal}>{modalContent}</Modal>}
     </div>;
 }
